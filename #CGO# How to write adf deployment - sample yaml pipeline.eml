@@ -1,0 +1,2733 @@
+Delivered-To: saileswar.saha@gmail.com
+Received: by 2002:a05:7022:429:b0:98:11e7:41d with SMTP id 41csp377490dlf;
+        Fri, 13 Jun 2025 08:26:46 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF5wF6fUjEWLFvX3C2fVnwkmOSJumDJdJfKmFUr9a1J8KNGhL+FV+PANlHy/cG7q48dXnTA
+X-Received: by 2002:a05:6830:7313:b0:72b:b8d8:3995 with SMTP id 46e09a7af769-73a363384ddmr107824a34.19.1749828405975;
+        Fri, 13 Jun 2025 08:26:45 -0700 (PDT)
+Return-Path: <saileswar.saha@capgemini.com>
+Received: from esa6.hc2065-58.eu.iphmx.com (esa6.hc2065-58.eu.iphmx.com. [194.165.214.190])
+        by mx.google.com with ESMTPS id 46e09a7af769-73a283dc009si908489a34.24.2025.06.13.08.26.44
+        for <saileswar.saha@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 13 Jun 2025 08:26:45 -0700 (PDT)
+Received-SPF: pass (google.com: domain of saileswar.saha@capgemini.com designates 194.165.214.190 as permitted sender) client-ip=194.165.214.190;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@capgemini.com header.s=group3 header.b="BJ/+cYAx";
+       arc=fail (body hash mismatch);
+       spf=pass (google.com: domain of saileswar.saha@capgemini.com designates 194.165.214.190 as permitted sender) smtp.mailfrom=saileswar.saha@capgemini.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=capgemini.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=capgemini.com; i=@capgemini.com; q=dns/txt; s=group3;
+  t=1749828404; x=1781364404;
+  h=from:to:subject:date:message-id:references:in-reply-to:
+   mime-version;
+  bh=STvzELGHCg4TjxJ37keBI7PO7fdi4hhl6cepFG4c8DU=;
+  b=BJ/+cYAxs0NMahrtTM69IpOqYG/Di7Br+Kdil6NXP74CHwSEWcVR+Lc8
+   irf7kVe2qQz3YJvLY3HgdWcFWAcz1oQAkQEjDRilYY/2TFmm4zzdE539G
+   /u8jnq8ujF1RvVZacRW7Z8olV3bRLeby0QlUZj77XDDRMAHNuDFPJzlp3
+   TZKKdlFhBTUqiysqXj5pviNxNHqB11kR8ApVX48kdsjuOXWNtFlIYFh27
+   coV0fQ7ZPsqmk/ejowC7GBt12a9gYKz0prz9qGZxqNFdfkCSjcVusWCe0
+   dChbkTwbfAWCkfgmlu9saBL32Kj4uogxOo6QsiTj1ThAYrPNGoLfwv3f0
+   A==;
+X-CSE-ConnectionGUID: JkMLK7jxRyGDg/8H6DqTJg==
+X-CSE-MsgGUID: wdAdmiPaTeSB3Fti2ZWaAQ==
+X-IronPort-AV: E=Sophos;i="6.16,234,1744063200"; 
+   d="png'150?scan'150,208,217,150,145";a="19441595"
+Received: from spffrpar02.capgemini.com ([194.4.230.74])
+  by ob1.hc2065-58.eu.iphmx.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 13 Jun 2025 17:26:43 +0200
+X-CSE-ConnectionGUID: ZILMFsQmQcymmF5Ou2G4kQ==
+X-CSE-MsgGUID: 7hoBuPT6ThKag9Ya/eF8tw==
+X-IronPort-AV: E=Sophos;i="6.16,234,1744063200"; 
+   d="png'150?scan'150,208,217,150,145";a="400806562"
+Received: from intdlp.capgemini.com (HELO NLDCADLP02) ([10.36.128.101])
+  by IRFRPAR-C695-02-D2-incoming.capgemini.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 13 Jun 2025 17:26:43 +0200
+Received: from NLDCADLP02 (localhost [127.0.0.1])
+	by NLDCADLP02.localdomain (Service) with ESMTP id F1A3C840160
+	for <saileswar.saha@gmail.com>; Fri, 13 Jun 2025 11:26:41 -0400 (EDT)
+Received: from AS8PR04CU009.outbound.protection.outlook.com (mail-westeuropeazlp17011026.outbound.protection.outlook.com [40.93.65.26])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-384) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by NLDCADLP02.localdomain (Service) with ESMTPS id BA5DD84015F
+	for <saileswar.saha@gmail.com>; Fri, 13 Jun 2025 11:26:41 -0400 (EDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=k0YxZXVYHRcoaBRRjrLYvx5fnZokeovDpvIJHTjssZtxuzybJC/lzoIlX+scb/J3Iwwc4VoLX/x36PK3dlCPUBux1wX0c7G6D1XldfOjbCTO4wP6bE+G6hfpgfRX+D+LQ66qZMLzBaYhhgbWGMMPhVlHQpMWlAP0nnWg+w9fYk0BDO1Uznu4DmgxQ1/+hJluIXJxrf6ztqtDmxmzvm9SwdfrK/UEHJP4jLTQP2ruUjP3U1bOgyZjvW9vX0Anf8AKT+8hlSKki/77W9uR3T5LqGtZpHsVq0diqYgMSmIWSuSM9fKRzJLFgdNmtpP8zOeJlXE/6e5EPJKFKRlg8kS63Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0eSI5imufr0oWER2EEde24XJ0jGSZzcHCRhBIltMAdI=;
+ b=ihLH0YwiCckWV5tlzba+Fl27fv96rgVaQhGAb79Lc0xNi3L7weagVXwA6w6TF3OC0duU8L5pdCdx1O11TnQ8cqL1bvjlCwaeVXXLq8f2KS2mlAECbyZ0ha3WqSbHF+LEDy6X0XrxSj/5COwlzcAdUW3wOJnBCgV5AxLX/v1yks3zz+OWats3eCM/ZVbPIiqdQwZn/+JcnBY6blXJZMEfBcz7A4ZbYwbYwnnMLXyZ8HdsHimfAoupm8X2PMI6s+lbhRuV+fxXo/l+NK8VxMSxq/HSXarchwUAK5rOfm+koxVt4UeKbUU54hKZTkQn27dealfSIkoYBe0x5i+LoTOlsw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=capgemini.com; dmarc=pass action=none
+ header.from=capgemini.com; dkim=pass header.d=capgemini.com; arc=none
+Received: from DB9PR02MB7228.eurprd02.prod.outlook.com (2603:10a6:10:25c::15)
+ by DB4PR02MB8728.eurprd02.prod.outlook.com (2603:10a6:10:380::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.19; Fri, 13 Jun
+ 2025 15:26:39 +0000
+Received: from DB9PR02MB7228.eurprd02.prod.outlook.com
+ ([fe80::bc27:e9d0:eb4:f989]) by DB9PR02MB7228.eurprd02.prod.outlook.com
+ ([fe80::bc27:e9d0:eb4:f989%6]) with mapi id 15.20.8835.019; Fri, 13 Jun 2025
+ 15:26:39 +0000
+From: "Saha, Saileswar" <saileswar.saha@capgemini.com>
+To: Saileswar Saha <saileswar.saha@gmail.com>
+Subject: #CGO# How to write adf deployment - sample yaml pipeline
+Thread-Topic: #CGO# How to write adf deployment - sample yaml pipeline
+Thread-Index: AdvccfzB1M+BgytZSFeiM0v0buF2DAABXLhD
+Date: Fri, 13 Jun 2025 15:26:39 +0000
+Message-ID:  <DB9PR02MB72286CC09312020D23F01ECD9677A@DB9PR02MB7228.eurprd02.prod.outlook.com>
+References:  <GV1PR05MB111972072D9A18F03691240BFB577A@GV1PR05MB11197.eurprd05.prod.outlook.com>
+In-Reply-To:  <GV1PR05MB111972072D9A18F03691240BFB577A@GV1PR05MB11197.eurprd05.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+msip_labels:  MSIP_Label_0bce33f7-04c0-4596-9b71-ba8617e88451_ActionId=099f38bf-9ba5-46d4-91a3-00ee64179968;MSIP_Label_0bce33f7-04c0-4596-9b71-ba8617e88451_ContentBits=0;MSIP_Label_0bce33f7-04c0-4596-9b71-ba8617e88451_Enabled=true;MSIP_Label_0bce33f7-04c0-4596-9b71-ba8617e88451_Method=Privileged;MSIP_Label_0bce33f7-04c0-4596-9b71-ba8617e88451_Name=0bce33f7-04c0-4596-9b71-ba8617e88451;MSIP_Label_0bce33f7-04c0-4596-9b71-ba8617e88451_SetDate=2025-06-13T14:47:31Z;MSIP_Label_0bce33f7-04c0-4596-9b71-ba8617e88451_SiteId=3a15904d-3fd9-4256-a753-beb05cdf0c6d;MSIP_Label_0bce33f7-04c0-4596-9b71-ba8617e88451_Tag=10,
+ 0, 1, 1;
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=capgemini.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB9PR02MB7228:EE_|DB4PR02MB8728:EE_
+x-ms-office365-filtering-correlation-id: 2b3bd53f-f993-4aea-4ff5-08ddaa8eb14d
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:  BCL:0;ARA:13230040|366016|376014|1800799024|13003099007|8096899003|4053099003|38070700018;
+x-microsoft-antispam-message-info:  =?Windows-1252?Q?jwv9SfKUZDhvH5QozfWsvOrJrY0rc+oxHtKmSfSQ2fwwZIcQbpfFy3BL?=
+ =?Windows-1252?Q?/9spPoQh0kK/RhjkPe05A19gWBgON5UuiXoiibbT37NXMPAOX5uKsd/E?=
+ =?Windows-1252?Q?mRnIJGLfEqeBOe/PTF29PnsCcHbeJjW2bft/l5JE2brdnnovTSTPWnlR?=
+ =?Windows-1252?Q?UOZROr53+5TLzF9qyGVjsp5iP6Pz9PJTApTPrPWjNdL8ATypRH0jitKk?=
+ =?Windows-1252?Q?JS8N+zfTvERQM1F4+zPbKhummPU5KpNpbvUB1Ho7tYuOagWyiER7ho7y?=
+ =?Windows-1252?Q?PfhZQcN3eBWalEKdWEuy/egACD7rai5ortkeY7h1iFuUmbSYjUQ6wh6X?=
+ =?Windows-1252?Q?rqp7yqNzaKq729ATSGKpa+3Px83Bmw5nMZn8+lsVeCy2C/Uafo3j8QI9?=
+ =?Windows-1252?Q?9ZzE+b/1OwlspD9/ZGJeDYoV+H5b1cDS8Wq43d9GYV1flSIA464YxJc8?=
+ =?Windows-1252?Q?nczre9C95HYh4E+/HVfkfE4YfVJ/DTcjEF1s3wGZ8kLwTt0DH8cBHBcR?=
+ =?Windows-1252?Q?TDVut2ChYWlPsI/ueSlZWJ/gS9bw13MC69k/InZLDHFkctbgVmELntwt?=
+ =?Windows-1252?Q?4HpQZcwvutEjn6BnQFtaPbjgT9Fc82R+/JDd84d1e2jbqt9RExJRa5pz?=
+ =?Windows-1252?Q?hdiDWuUERQBv1hyPax9BVSS/DRYuYhQ6HuoVA5nP2QmtqR9smWLQvoBc?=
+ =?Windows-1252?Q?qrcOGQp+p4YIszRQixR7Wso1os/MHjDzCaGQ4TivjNABeBEtZ6g/MT6+?=
+ =?Windows-1252?Q?V4YQpKoBw7prA+wP71nLRLcvfSbnH8Y3TJKBVYkgYNE6QFcAryiicRCz?=
+ =?Windows-1252?Q?kp9GBnh24eJDVfeYv++mm1fUu+zBaoYagvSCjOLLYWA7K3Wy/AfbLCLS?=
+ =?Windows-1252?Q?tdflnEL4Xf7amsCFFy2JLhc+nz0k9ymcDfFXdieb52KsADLKhUoMvXqh?=
+ =?Windows-1252?Q?1RfWkOL+gaofq5tIrgSdn7af9/6+7/Zax+L4S1lpKI9dIkWGMLsBreWS?=
+ =?Windows-1252?Q?rn7Wh66FQAjgORr3IZrFWE4iJMW3HVfOO4CPuvc7ZFD9L49iZKvFX/6G?=
+ =?Windows-1252?Q?OiIZPQda/1vEqdyd3Te1bpymrp4THbPK0nGj7Ue0vlNWkp2GU2E5aZde?=
+ =?Windows-1252?Q?v/rzQHbEAD5JMyrl+5utMXXIQwxCv8XkZ1ZavOEbplWzjBPCF+C6zV8d?=
+ =?Windows-1252?Q?HAk8cvzwch44P7XSUvrFqtbj2OEztlonW8Uar6laW+mlDjnSg3J7vm2s?=
+ =?Windows-1252?Q?PzD68J8riCkATuM/RJabch7GnpPY0Zy2E07ezAOhgCRfE826GByqlVAq?=
+ =?Windows-1252?Q?v2sUajuvqF2mDaefwUhW2DgfcdsWDFmObaRgNkust2KtdDTspW79ZVt6?=
+ =?Windows-1252?Q?RB/Z5gB/JZfcuM2FF5nWdUL4ERgLBEQ9oqE2khfJkzKia2jtCx/hRFBg?=
+ =?Windows-1252?Q?l4EMoDapBeTeiMUDFSKn0is3UxaUScTYCyhfFS8kp6S4PTPElv5S5uRx?=
+ =?Windows-1252?Q?hgZMqznqY6t6L+XNyskhYnXS0wYzhTYFKm9HGPxQoPpDYjVw0+mhmkZz?=
+ =?Windows-1252?Q?i1PstkgyCrbPfOu+?=
+x-forefront-antispam-report:  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB9PR02MB7228.eurprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(13003099007)(8096899003)(4053099003)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:  =?Windows-1252?Q?dBpoa/QczmpyIMa8v5NO0UN0gE0Zq7fvrekEbXkCjwzyIcDXF7bkyzHP?=
+ =?Windows-1252?Q?/mY9VrFEJJ0vzhO0PNE3+xVID1tvm2bZ4NSOzdCJZ+yn7m8f12E4avxQ?=
+ =?Windows-1252?Q?MXykXgPg1dvreZRsLHLc1ECl3z7qm8BUoUZb9OQKi/KquaNwzbAowPNQ?=
+ =?Windows-1252?Q?zLnMe56FB2V2vubyowz4mEw2RECqklwIiKJ1bw4wdmE+h0d0tImmdMeN?=
+ =?Windows-1252?Q?fRUmyfn30r47ooevgrwyTixglj7tgIZDyCbsCXzeLcxusiega4sPAWkU?=
+ =?Windows-1252?Q?92FIvpM+Pvk0uOg2zIEp+cqm5y8BLDkdDqLeO0Bx/UNg74ODJlBPWygO?=
+ =?Windows-1252?Q?qOHFbHvsrroAhHNQqrwJ2HWgu7HLdYrrWEHrhV3LTFLRFYyUBLysHx8T?=
+ =?Windows-1252?Q?o6O7AaEdgCLKyLtdFJGiuqq/ZEVosRgvWxe8gLlg+oSuKZDUUgLSiQaC?=
+ =?Windows-1252?Q?6W8pJOhdq6MxA8aMw3KENzXkDqSWl0y/1+98trPCsYxdNHZAVoAZIpPN?=
+ =?Windows-1252?Q?563+P0+uzBWuAHBryF+Ajwqy5CBEIVLdmeOA0PIesL+uoTfjMpLEqJMF?=
+ =?Windows-1252?Q?qlfIZvnvuAvrp0e0ETtr5k1HueV4pgwMpbrQ6E64CsJsI1Ku/tBPk9z6?=
+ =?Windows-1252?Q?ucSnsjtcawHVDBeIrodxoTpKM9thWoHWJfwhhJxK/Z5O1IOM5d9sp54H?=
+ =?Windows-1252?Q?S1j73bmjjCC7uH+3sWfwD8Ki/mdPyveWGaQ38NfCUuNNavJZiEiI4KFP?=
+ =?Windows-1252?Q?oAm0MLLtmBSe2LmF/VD3h/3KdZ+/828STXH52tKGdC/pSCRNRJDD4COi?=
+ =?Windows-1252?Q?8asw3VWzAwVQZeegjrkr835G5+BTbO02EzWCQ3nrLC0PmWCxLxtdp/Rn?=
+ =?Windows-1252?Q?bnl1TOOsOQbQOnyC7MGwwXjlasFxDE7zrlbENqqEPLICVDc0PapmwJM8?=
+ =?Windows-1252?Q?DMGoCpsORa93tlnYtVB+X0ycvXSdRYNlQrplAZl7MnmT5o/zYspoyFDa?=
+ =?Windows-1252?Q?Tos595DSNglxsjNWGNs8CyX3EPICw8k63l1H+GXlLqyeffqfoci4/97r?=
+ =?Windows-1252?Q?JH2Q/+HyBfWCyD9h/CWoXXQn0toJdjbyo1R1kulGzaCrv2W5XpzrUGZ3?=
+ =?Windows-1252?Q?TAuqCwHM5ItuU7iYqSuK9ptjpll8MslaoS1p0fWDULCtx6ROeFSLc96K?=
+ =?Windows-1252?Q?J2TAtL7zZnYIUGayJns/IVrDDqflyIEJKNB0OcG7Hg1zolUrm2n/J1IQ?=
+ =?Windows-1252?Q?jGhgKwoDDBbz/EqIIqiGqSRIVlSxJui5mXcrWDMO37HFfhw+7yuC0AuI?=
+ =?Windows-1252?Q?4KHjj8ZLYYuR9zy7/F9a8quwI9DIjLpJeqQz+uY+bAbGiEHMDeVcPSNq?=
+ =?Windows-1252?Q?5uDLF7nQlIA9ZFWEpCeHiLOnks6Rs98bkbVuYwg7zLpoLWkwFEDutO9k?=
+ =?Windows-1252?Q?upN1MCyFlYXPAweuUJbMOmnAVvBmPyPo0ZGkg1eu5IMlVmxXTiohpYEk?=
+ =?Windows-1252?Q?tv145eAH0/ZwQB7D00EpuMFH+OGOa11dyjpCZ7sIlW/4EYisIUzGroDN?=
+ =?Windows-1252?Q?ys8NpjPGLYwLk8obT+GNQHuj9CGxzoH8opFtGcOH73a69sfzrcu0Cfrz?=
+ =?Windows-1252?Q?77bNJJMpLtO4fbcr/2EGWeVbt75ZANHhJBwtQfBQXOhrrmt8o/eRQLMT?=
+ =?Windows-1252?Q?dbzonw7ORUvYFCrHiqpzT1kMMr5mjIRm6ytsGZSxu9g9hN1xAeqflg?=
+ =?Windows-1252?Q?=3D=3D?=
+Content-Type: multipart/related;
+	boundary="_012_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_";
+	type="multipart/alternative"
+MIME-Version: 1.0
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 	LZ7pUi/oT+R4SyVTkA5Zdc78Cf8EzHQtcYcepp999IubhcQe/9JtL+CDYA2meZF2MH0wodUnIVyKQWAJqoYjjZVfUHgI88iz07TmYSu3qCWxFOMeTUETFuYKSn1y12L0o40Zo8lAF/yWiLUNXVM+BjrYVrIOrajDZxnsr6BJRmRdjD3ZNaGvSm1TDgWblczPKSUcScbgtVRzQ0Qiw3kYtT8/LpuckeiaB20yZ53hbRP4yqLwROLHZN8P4TQ4Qd92VZcp7QbIp1o5M3torsgeZtrJNvD9E+i5wXuujrGvq5ezLKNg14D5VNzvIrfq/BBrAbH6JJGDOEqCni4wvUnRD+UGt93aJyWdmvY08FPuxJZ4Uw9pnDEDaXxzDUxhhjJgzbL5uVFnwg7Xhe7GFpaN0kjw4+SORE/we2HpdP9ATrtr430Y75irmJQb4GIMu+aSPi7W6SKKZ5ddJwmo/R6HUlSc3SooNzG+T/OCOpFpLHjD5HPLfCVsl3ystERUAS6OnMO7l+10/toPtJUq/qoRed0QUN8tLkF55NZI+2DUyFJLn9qclxvGzBHF/p8ddCUidIt1XsQiyV4BuUCAKVtfAEZhQseDAelgtkS3YN18Q4WKjEooj3YdjG/BWykrm+IL
+X-OriginatorOrg: capgemini.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR02MB7228.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2b3bd53f-f993-4aea-4ff5-08ddaa8eb14d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Jun 2025 15:26:39.2574
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 76a2ae5a-9f00-4f6b-95ed-5d33d77c4d61
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: od5FWzRlqRX5i/BsbLwywgdCQ+ijaUa5Ab7Vhwj/J+7KMWIJf7ddGvplVAbV6WU+WVTrGJ8TGsQiIy1as77twv0UzH+njKlsy1MMLJofObk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR02MB8728
+
+--_012_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_
+Content-Type: multipart/alternative;
+	boundary="_000_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_"
+
+--_000_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_
+MIME-Version: 1.0
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+sample...
+
+
+=97
+
+Thanks & Regards,
+
+Saileswar Saha [cid:bdc28a57-32d0-4b31-b194-8107d84bb896] <https://www.link=
+edin.com/in/saileswarsaha/>
+
+
+
+[14305E5A]
+
+People matter, results count
+
+www.capgemini.com<http://www.capgemini.com/>
+
+
+
+[cid:0023e5dc-0100-4533-9a3f-044e00953cf1]<https://twitter.com/capgemini> [=
+cid:29c71a54-f193-44ed-9530-e775018c163b] <https://www.linkedin.com/company=
+/capgemini>  [cid:32edf7b4-8356-4824-9f79-964eb7a70626] <https://www.facebo=
+ok.com/capgemini>  [cid:d9cca2eb-cc7b-46f1-9541-abc7edaced76] <https://www.=
+youtube.com/profile?user=3Dcapgeminimedia>   [cid:9af87449-3496-4791-be0b-b=
+77d29479f50] <https://www.instagram.com/capgemini>
+
+Cloud Solutions Architect | Azure Solution Architect Expert
+
+Financial Services-FSSBU | Kolkata, India
+
+[cid:289a9e68-0633-415c-9796-dbe2d64022be]+91-9434692946 | [cid:c205d940-b6=
+68-4383-b08f-194979a4bd73]  saileswar.saha@capgemini.com<mailto:saileswar.s=
+aha@capgemini.com>
+
+
+
+
+
+Upcoming PTO : NA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+________________________________
+
+
+trigger: none
+
+
+
+parameters:
+
+  - name: environment
+
+    default: test
+
+    values:
+
+      - test
+
+      - acceptance
+
+      - production
+
+
+
+resources:
+
+  repositories:
+
+    - repository: adf-publish
+
+      type: git
+
+      name: rezo-infra-adf
+
+      ref: adf_publish
+
+    - repository: adf-code
+
+      type: git
+
+      name: rezo-infra-adf
+
+      ref: $(Build.SourceBranch)
+
+    - repository: templates
+
+      type: git
+
+      name: GRD0001045/pita-pipeline-templates
+
+
+
+variables:
+
+  - name: sourceDataFactoryName
+
+    value: remz02-d-01-df
+
+
+
+  - ${{ if eq(parameters.environment, 'test') }}:
+
+    - group: AbnAmro-remz02-adf-test-cicd
+
+    - name: resourceGroup
+
+      value: remz02-t-rg
+
+    - name: managedIdentityName
+
+      value: remz02-t-uami
+
+    - name: databricksWorkspaceName
+
+      value: remz02-t-01-dbr
+
+    - name: ADBRoleName
+
+      value: Contributor
+
+    - name: azureEnvironment
+
+      value: remz02-t-rg-cicd01
+
+
+
+  - ${{ if eq(parameters.environment, 'acceptance') }}:
+
+    - group: AbnAmro-remz02-adf-acc-cicd
+
+    - name: resourceGroup
+
+      value: remz02-a-rg
+
+    - name: managedIdentityName
+
+      value: remz02-a-uami
+
+    - name: databricksWorkspaceName
+
+      value: remz02-a-01-dbr
+
+    - name: ADBRoleName
+
+      value: Contributor
+
+    - name: azureEnvironment
+
+      value: remz02-a-rg-cicd01
+
+
+
+  - ${{ if eq(parameters.environment, 'production') }}:
+
+    - group: AbnAmro-remz02-adf-prod-cicd
+
+    - name: resourceGroup
+
+      value: remz02-p-rg
+
+    - name: managedIdentityName
+
+      value: remz02-p-uami
+
+    - name: databricksWorkspaceName
+
+      value: remz02-p-01-dbr
+
+    - name: ADBRoleName
+
+      value: Contributor
+
+    - name: azureEnvironment
+
+      value: remz02-p-rg-cicd01
+
+
+
+pool:
+
+  vmImage: 'ubuntu-latest'
+
+
+
+stages:
+
+- stage: 'remz02_${{ parameters.environment }}_ADFCI'
+
+
+
+  jobs:
+
+
+
+  # Creating a SNOW ticket if the deplopment is for - acceptance/production
+
+  - ${{ if in(parameters.environment, 'acceptance', 'production') }}:
+
+    - template: /generic/servicenow/create-change.yml@templates
+
+      parameters:
+
+        app_config_id: CI0030792
+
+        app_version_number: '1.0.0'
+
+        approval_environment: ${{  variables.azureEnvironment }}
+
+        description: Remediation ${{ parameters.environment }} environment =
+ADF Deployment - Repo $(Build.DefinitionName) with build number $(Build.Bui=
+ldNumber) at https://dev.azure.com/cbsp-abnamro/GRD0001030/_git/rezo-infra-=
+adf
+
+
+
+  # Actual job to deploy ADF in Azure
+
+  - job: Deploy_ADF
+
+    displayName: 'Deploy ADF'
+
+    dependsOn:
+
+      - ${{ if in(parameters.environment, 'acceptance', 'production') }}:
+
+        - SN_CreateChange
+
+    steps:
+
+      - checkout: adf-publish
+
+        persistCredentials: true
+
+        clean: true
+
+
+
+  # These are all emanled tasks which are actually needed to deploy ADF pro=
+perly
+
+  # to all environments.
+
+
+
+      - task: PowerShell@2
+
+        enabled: true
+
+        displayName: 'Removing unnecessary entries from ARM Template'
+
+        inputs:
+
+          targetType: 'inline'
+
+          pwsh: true
+
+          script: |
+
+            # Define the path to the template file
+
+            $templateFile =3D "${{ variables.sourceDataFactoryName }}/ARMTe=
+mplateForFactory.json"
+
+
+
+            # Load the template
+
+            $template =3D Get-Content -Raw -Path $templateFile | ConvertFro=
+m-Json
+
+
+
+            Write-Host "Totoal resources count before removal:- $($template=
+.resources.Count)"
+
+
+
+            # Remove the unnecessary VNet section
+
+            $template.resources =3D $template.resources | Where-Object {
+
+              -not ($_."type" -eq "Microsoft.DataFactory/factories/managedV=
+irtualNetworks" -and $_."name" -eq "[concat(parameters('factoryName'), '/ma=
+nagedPrivateEndpoint')]")
+
+            }
+
+
+
+            Write-Host "Totoal resources count after removal:- $($template.=
+resources.Count)"
+
+
+
+            # Save the modified template
+
+            $template | ConvertTo-Json -Depth 100 | Set-Content -Path $temp=
+lateFile -Force
+
+
+
+      - task: AzurePowerShell@5
+
+        enabled: true
+
+        displayName: 'Stoping all ADF triggers'
+
+        inputs:
+
+          azureSubscription: $(AzureSubscription)
+
+          ScriptType: 'InlineScript'
+
+          azurePowerShellVersion: 'LatestVersion'
+
+          Inline: |
+
+            # Variables
+
+            $resourceGroupName =3D "${{ variables.resourceGroup }}"
+
+            $dataFactoryName =3D "$(dataFactoryName)"
+
+
+
+            # Get all triggers in the Data Factory
+
+            $triggers =3D Get-AzDataFactoryV2Trigger -ResourceGroupName $re=
+sourceGroupName -DataFactoryName $dataFactoryName
+
+
+
+            foreach ($trigger in $triggers) {
+
+              Write-Host "Checking Trigger:- $($trigger.Name)"
+
+              try
+
+              {
+
+                if($trigger.Properties.Pipelines.Count -eq 0)
+
+                {
+
+                  Write-Host "$($trigger.Name) - trigger doesn't have any p=
+ipeline refferences. No need to stop."
+
+                }
+
+                else
+
+                {
+
+                  Write-Host "Trigger found and stoping....."
+
+                  Stop-AzDataFactoryV2Trigger -ResourceGroupName $resourceG=
+roupName -DataFactoryName $dataFactoryName -TriggerName $trigger.Name -Force
+
+                  Write-Output "Stopped trigger: $($trigger.Name)"
+
+                }
+
+              }
+
+              catch {
+
+                Write-Host $_
+
+                Write-Host "$($trigger.Name) - trigger unable to stop or no=
+t found or errors happened. Please check the above error message."
+
+              }
+
+            }
+
+
+
+      - task: AzureResourceManagerTemplateDeployment@3
+
+        enabled: true
+
+        displayName: Deploy ARM template on ${{ parameters.environment }} i=
+n $(resourceGroup)
+
+        inputs:
+
+          azureResourceManagerConnection: $(AzureSubscription)
+
+          subscriptionId: ${{ variables.subscriptionId }}
+
+          resourceGroupName: ${{ variables.resourceGroup }}
+
+          action: 'Create Or Update Resource Group'
+
+          location: West Europe
+
+          deploymentMode: 'Incremental'
+
+          csmFile: ${{ variables.sourceDataFactoryName }}/ARMTemplateForFac=
+tory.json
+
+          csmParametersFile: ${{ variables.sourceDataFactoryName }}/ARMTemp=
+lateParametersForFactory.json
+
+          deploymentName: Adf-$(dataFactoryName)-${{ parameters.environment=
+ }}
+
+          overrideparameters: >
+
+              -factoryName "$(dataFactoryName)"
+
+              -DialingestionData_properties_parameters_SrcADLSPathWithConta=
+iner {"type":"string","defaultValue":"$(DialingestionData_properties_parame=
+ters_SrcADLSPathWithContainer)"}
+
+              -DialingestionData_properties_parameters_ADBWrkflowJobId {"ty=
+pe":"string","defaultValue":"$(DialingestionData_properties_parameters_ADBW=
+rkflowJobId)"}
+
+              -DialingestionData_properties_parameters_ADBWrkSpaceURL {"typ=
+e":"string","defaultValue":"$(ls_remz_adb_fixcluster_properties_parameters_=
+ADBWrkSpaceURL)"}
+
+              -DialingestionData_properties_parameters_ADBWrkSpaceResourceI=
+D {"type":"string","defaultValue":"$(ls_remz_adb_fixcluster_properties_para=
+meters_ADBWrkSpaceResourceID)"}
+
+              -DialingestionData_properties_parameters_ADBClusterID {"type"=
+:"string","defaultValue":"$(ls_remz_adb_fixcluster_properties_parameters_AD=
+BClusterID)"}
+
+              -ds_dial_pickup_source_properties_linkedServiceName_parameter=
+s_SrcStorageURI "@dataset().SrcStgURL"
+
+              -ds_dial_pickup_source_properties_parameters_SrcContainerName=
+ {"type":"string","defaultValue":"$(ds_dial_pickup_source_properties_parame=
+ters_SrcContainerName)"}
+
+              -ds_dial_pickup_source_properties_parameters_SrcFolderPath {"=
+type":"string","defaultValue":"$(ds_dial_pickup_source_properties_parameter=
+s_SrcFolderPath)"}
+
+              -ds_dial_pickup_source_properties_parameters_SrcFileName {"ty=
+pe":"string","defaultValue":" "}
+
+              -ds_dial_pickup_source_properties_parameters_SrcStgURL {"type=
+":"string","defaultValue":"$(ds_dial_pickup_source_properties_parameters_Sr=
+cStgURL)"}
+
+              -ds_dial_pickup_target_properties_linkedServiceName_parameter=
+s_DestStorageURI "@dataset().targetStgURL"
+
+              -ds_dial_pickup_target_properties_parameters_targetContainerN=
+ame {"type":"string","defaultValue":"$(ds_dial_pickup_target_properties_par=
+ameters_targetContainerName)"}
+
+              -ds_dial_pickup_target_properties_parameters_targetFolderPath=
+ {"type":"string","defaultValue":"$(ds_dial_pickup_target_properties_parame=
+ters_targetFolderPath)"}
+
+              -ds_dial_pickup_target_properties_parameters_targetStgURL {"t=
+ype":"string","defaultValue":"$(ds_dial_pickup_target_properties_parameters=
+_targetStgURL)"}
+
+              -ds_dial_pushto_source_properties_linkedServiceName_parameter=
+s_SrcStorageURI "@dataset().SrcStgURL"
+
+              -ds_dial_pushto_source_properties_parameters_SrcContainerName=
+ {"type":"string","defaultValue":"$(ds_dial_pushto_source_properties_parame=
+ters_SrcContainerName)"}
+
+              -ds_dial_pushto_source_properties_parameters_SrcFolderPath {"=
+type":"string","defaultValue":"$(ds_dial_pushto_source_properties_parameter=
+s_SrcFolderPath)"}
+
+              -ds_dial_pushto_source_properties_parameters_SrcFileName {"ty=
+pe":"string","defaultValue":" "}
+
+              -ds_dial_pushto_source_properties_parameters_SrcStgURL {"type=
+":"string","defaultValue":"$(ds_dial_pushto_source_properties_parameters_Sr=
+cStgURL)"}
+
+              -ds_dial_pushto_target_properties_linkedServiceName_parameter=
+s_DestStorageURI "@dataset().targetStgURL"
+
+              -ds_dial_pushto_target_properties_parameters_targetContainerN=
+ame {"type":"string","defaultValue":"$(ds_dial_pushto_target_properties_par=
+ameters_targetContainerName)"}
+
+              -ds_dial_pushto_target_properties_parameters_targetFolderPath=
+ {"type":"string","defaultValue":"$(ds_dial_pushto_target_properties_parame=
+ters_targetFolderPath)"}
+
+              -ds_dial_pushto_target_properties_parameters_targetStgURL {"t=
+ype":"string","defaultValue":"$(ds_dial_pushto_target_properties_parameters=
+_targetStgURL)"}
+
+              -ds_famas_source_properties_linkedServiceName_parameters_Stor=
+ageURL "@dataset().SrcStgURL"
+
+              -ds_famas_source_properties_parameters_SrcContainerName {"typ=
+e":"string","defaultValue":"$(ds_famas_source_properties_parameters_SrcCont=
+ainerName)"}
+
+              -ds_famas_source_properties_parameters_SrcFolderPath {"type":=
+"string","defaultValue":"$(ds_famas_source_properties_parameters_SrcFolderP=
+ath)"}
+
+              -ds_famas_source_properties_parameters_SrcFileName {"type":"s=
+tring","defaultValue":" "}
+
+              -ds_famas_source_properties_parameters_SrcStgURL {"type":"str=
+ing","defaultValue":"$(ds_famas_source_properties_parameters_SrcStgURL)"}
+
+              -ds_famas_target_properties_linkedServiceName_parameters_Dest=
+StorageURI "@dataset().targetStgURL"
+
+              -ds_famas_target_properties_parameters_targetContainerName {"=
+type":"string","defaultValue":"$(ds_famas_target_properties_parameters_targ=
+etContainerName)"}
+
+              -ds_famas_target_properties_parameters_targetFolderPath {"typ=
+e":"string","defaultValue":"$(ds_famas_target_properties_parameters_targetF=
+olderPath)"}
+
+              -ds_famas_target_properties_parameters_targetStgURL {"type":"=
+string","defaultValue":"$(ds_famas_target_properties_parameters_targetStgUR=
+L)"}
+
+              -ds_nCil_source_properties_linkedServiceName_parameters_SrcSt=
+orageURI "@dataset().SrcStgURL"
+
+              -ds_nCil_source_properties_parameters_SrcContainerName {"type=
+":"string","defaultValue":"$(ds_nCil_source_properties_parameters_SrcContai=
+nerName)"}
+
+              -ds_nCil_source_properties_parameters_SrcFolderPath {"type":"=
+string","defaultValue":"$(ds_nCil_source_properties_parameters_SrcFolderPat=
+h)"}
+
+              -ds_nCil_source_properties_parameters_SrcFileName {"type":"st=
+ring","defaultValue":" "}
+
+              -ds_nCil_source_properties_parameters_SrcStgURL {"type":"stri=
+ng","defaultValue":"$(ds_nCil_source_properties_parameters_SrcStgURL)"}
+
+              -ds_nCil_target_properties_linkedServiceName_parameters_DestS=
+torageURI "@dataset().targetStgURL"
+
+              -ds_nCil_target_properties_parameters_targetContainerName {"t=
+ype":"string","defaultValue":"$(ds_nCil_target_properties_parameters_target=
+ContainerName)"}
+
+              -ds_nCil_target_properties_parameters_targetFolderPath {"type=
+":"string","defaultValue":"$(ds_nCil_target_properties_parameters_targetFol=
+derPath)"}
+
+              -ds_nCil_target_properties_parameters_targetStgURL {"type":"s=
+tring","defaultValue":"$(ds_nCil_target_properties_parameters_targetStgURL)=
+"}
+
+              -ds_ihvolume_inbound_properties_parameters_targetStorageURL {=
+"type":"string","defaultValue":"$(ds_ihvolume_inbound_properties_parameters=
+_targetStorageURL)"}
+
+              -ds_ihvolume_inbound_properties_linkedServiceName_parameters_=
+SrcStorageURI "@dataset().targetStorageURL"
+
+              -ds_ihvolume_outbound_properties_parameters_sourceStorageURL =
+{"type":"string","defaultValue":"$(ds_ihvolume_outbound_properties_paramete=
+rs_sourceStorageURL)"}
+
+              -ds_ihvolume_outbound_properties_linkedServiceName_parameters=
+_SrcStorageURI "@dataset().sourceStorageURL"
+
+              -ds_nondial_inbound_properties_parameters_targetStorageURL {"=
+type":"string","defaultValue":"$(ds_nondial_inbound_properties_parameters_t=
+argetStorageURL)"}
+
+              -ds_nondial_inbound_properties_linkedServiceName_parameters_S=
+rcStorageURI  "@dataset().targetStorageURL"
+
+              -ds_nondial_outbound_properties_parameters_sourceStorageURL {=
+"type":"string","defaultValue":"$(ds_nondial_outbound_properties_parameters=
+_sourceStorageURL)"}
+
+              -ds_nondial_outbound_properties_linkedServiceName_parameters_=
+SrcStorageURI "@dataset().sourceStorageURL"
+
+              -ds_ecm_source_properties_linkedServiceName_parameters_SrcSto=
+rageURI "@dataset().SrcStgURL"
+
+              -ds_ecm_source_properties_parameters_SrcStgURL {"type":"strin=
+g","defaultValue":"$(ds_ecm_source_properties_parameters_SrcStgURL)"}
+
+              -ds_ecm_target_properties_linkedServiceName_parameters_SrcSto=
+rageURI "@dataset().targetStgURL"
+
+              -ds_ecm_target_properties_parameters_targetContainerName {"ty=
+pe":"string","defaultValue":"$(ds_ecm_target_properties_parameters_targetCo=
+ntainerName)"}
+
+              -ds_ecm_target_properties_parameters_targetStgURL {"type":"st=
+ring","defaultValue":"$(ds_ecm_target_properties_parameters_targetStgURL)"}
+
+              -ds_ecm_target_properties_parameters_targetFolderPath {"type"=
+:"string","defaultValue":"$(ds_ecm_target_properties_parameters_targetFolde=
+rPath)"}
+
+              -ls_remz_adb_fixcluster_properties_typeProperties_credential_=
+referenceName "$(ls_remz_adb_fixcluster_properties_typeProperties_credentia=
+l_referenceName)"
+
+              -ls_remz_adb_fixcluster_properties_parameters_ADBWrkSpaceURL =
+{"type":"string","defaultValue":"$(ls_remz_adb_fixcluster_properties_parame=
+ters_ADBWrkSpaceURL)"}
+
+              -ls_remz_adb_fixcluster_properties_parameters_ADBWrkSpaceReso=
+urceID {"type":"string","defaultValue":"$(ls_remz_adb_fixcluster_properties=
+_parameters_ADBWrkSpaceResourceID)"}
+
+              -ls_remz_adb_fixcluster_properties_parameters_ADBClusterID {"=
+type":"string","defaultValue":"$(ls_remz_adb_fixcluster_properties_paramete=
+rs_ADBClusterID)"}
+
+              -ls_remz_export_source_properties_typeProperties_url "@{linke=
+dService().SrcStorageURI}"
+
+              -ls_remz_export_source_properties_typeProperties_credential_r=
+eferenceName "$(ls_remz_export_source_properties_typeProperties_credential_=
+referenceName)"
+
+              -ls_remz_export_target_properties_typeProperties_url "@{linke=
+dService().DestStorageURI}"
+
+              -ls_remz_export_target_properties_typeProperties_credential_r=
+eferenceName "$(ls_remz_export_target_properties_typeProperties_credential_=
+referenceName)"
+
+              -ls_remz_stg_source_properties_typeProperties_serviceEndpoint=
+ "@{linkedService().StorageURL}"
+
+              -ls_remz_stg_source_properties_typeProperties_credential_refe=
+renceName "$(ls_remz_stg_source_properties_typeProperties_credential_refere=
+nceName)"
+
+              -tr-dial-source_properties_typeProperties_scope "$(tr-dial-so=
+urce_properties_typeProperties_scope)"
+
+              -tr-famas-source_properties_typeProperties_scope "$(tr-famas-=
+source_properties_typeProperties_scope)"
+
+              -tr-ncil-source_properties_typeProperties_scope "$(tr-ncil-so=
+urce_properties_typeProperties_scope)"
+
+              -tr-nondial-outbound_properties_typeProperties_scope "$(tr-no=
+ndial-outbound_properties_typeProperties_scope)"
+
+              -tr-ihvolume-famas_properties_typeProperties_scope "$(tr-ihvo=
+lume-famas_properties_typeProperties_scope)"
+
+              -tr-dialingestion-source_properties_typeProperties_scope "$(t=
+r-dialingestion-source_properties_typeProperties_scope)"
+
+              -tr-remendo-outbound_properties_typeProperties_scope "$(tr-re=
+mendo-outbound_properties_typeProperties_scope)"
+
+              -AutoResolveIntegrationRuntime_properties_typeProperties_comp=
+uteProperties_location "$(AutoResolveIntegrationRuntime_properties_typeProp=
+erties_computeProperties_location)"
+
+              -cred_remz_uami_name "$(dataFactoryName)/$(cred_remz_uami_nam=
+e)"
+
+              -cred_remz_uami_properties_typeProperties_resourceId "$(cred_=
+remz_uami_properties_typeProperties_resourceId)"
+
+              -DialTargetStgPLE_properties_privateLinkResourceId "$(DialTar=
+getStgPLE_properties_privateLinkResourceId)"
+
+              -DialTargetStgPLE_properties_groupId "$(DialTargetStgPLE_prop=
+erties_groupId)"
+
+              -FAMASTargetStgPLE_properties_privateLinkResourceId "$(FAMAST=
+argetStgPLE_properties_privateLinkResourceId)"
+
+              -FAMASTargetStgPLE_properties_groupId "$(FAMASTargetStgPLE_pr=
+operties_groupId)"
+
+              -nCilTargetStoragePLE_properties_privateLinkResourceId "$(nCi=
+lTargetStoragePLE_properties_privateLinkResourceId)"
+
+              -nCilTargetStoragePLE_properties_groupId "$(nCilTargetStorage=
+PLE_properties_groupId)"
+
+              -RemendoTargetSQLPLE_properties_privateLinkResourceId "$(Reme=
+ndoTargetSQLPLE_properties_privateLinkResourceId)"
+
+              -RemendoTargetSQLPLE_properties_groupId "$(RemendoTargetSQLPL=
+E_properties_groupId)"
+
+              -remz02ple_properties_privateLinkResourceId "$(remz02ple_prop=
+erties_privateLinkResourceId)"
+
+              -remz02ple_properties_groupId "$(remz02ple_properties_groupId=
+)"
+
+              -remz02ple_properties_fqdns $(remz02ple_properties_fqdns)
+
+
+
+      - task: AzurePowerShell@5
+
+        enabled: true
+
+        displayName: 'Starting all ADF triggers'
+
+        inputs:
+
+          azureSubscription: $(AzureSubscription)
+
+          ScriptType: 'InlineScript'
+
+          azurePowerShellVersion: 'LatestVersion'
+
+          Inline: |
+
+            # Variables
+
+            $resourceGroupName =3D "${{ variables.resourceGroup }}"
+
+            $dataFactoryName =3D "$(dataFactoryName)"
+
+
+
+            # Get all triggers in the Data Factory
+
+            $triggers =3D Get-AzDataFactoryV2Trigger -ResourceGroupName $re=
+sourceGroupName -DataFactoryName $dataFactoryName
+
+
+
+            foreach ($trigger in $triggers) {
+
+              Write-Host "Checking Trigger:- $($trigger.Name)"
+
+              try
+
+              {
+
+                if($trigger.Properties.Pipelines.Count -eq 0)
+
+                {
+
+                  Write-Host "$($trigger.Name) - trigger doesn't have any p=
+ipeline refferences. No need to start."
+
+                }
+
+                else
+
+                {
+
+                  Write-Host "Trigger found and starting....."
+
+                  Start-AzDataFactoryV2Trigger -ResourceGroupName $resource=
+GroupName -DataFactoryName $dataFactoryName -TriggerName $trigger.Name -For=
+ce
+
+                  Write-Output "Started trigger: $($trigger.Name)"
+
+                }
+
+              }
+
+              catch {
+
+                Write-Host $_
+
+                Write-Host "$($trigger.Name) - trigger unable to start or n=
+ot found or errors happened. Please check the above error message."
+
+              }
+
+            }
+
+
+
+  # These are all disabled tasks which are needed to be used for cleanup st=
+uff
+
+  # Please enable them only when you want to delete/remobe below items
+
+  # Before that Please disable all above tasks.
+
+
+
+      - task: AzurePowerShell@5
+
+        enabled: false
+
+        displayName: 'Removing Private endpoints for ${{ parameters.environ=
+ment }} Storage'
+
+        inputs:
+
+          azureSubscription: $(AzureSubscription)
+
+          ScriptType: 'InlineScript'
+
+          azurePowerShellVersion: 'LatestVersion'
+
+          Inline: |
+
+            # Define variables
+
+            $resourceGroupName =3D "${{ variables.resourceGroup }}"
+
+            $privateEndpointConnectionName =3D "remz02a01dls.0f262297-4172-=
+4959-83cd-ea11d635f357"
+
+            $resourceName =3D "remz02a01dls"
+
+            $resourceType =3D "Microsoft.Storage/storageAccounts"
+
+
+
+            Remove-AzPrivateEndpointConnection -Name $privateEndpointConnec=
+tionName -ResourceGroupName $resourceGroupName -ServiceName $resourceName -=
+PrivateLinkResourceType $resourceType -Force
+
+
+
+      - task: AzureCLI@2
+
+        enabled: false
+
+        displayName: 'Remove ADF managed PLE - remz02-p-01-df.nCilTargetSto=
+ragePLE'
+
+        inputs:
+
+          azureSubscription: $(AzureSubscription)
+
+          scriptType: 'bash'
+
+          scriptLocation: 'inlineScript'
+
+          inlineScript: |
+
+            # Define variables
+
+
+
+            az datafactory managed-private-endpoint delete --factory-name "=
+remz02-p-01-df" --name "nCilTargetStoragePLE" --managed-virtual-network-nam=
+e "default" --resource-group "remz02-p-rg" --yes
+
+
+
+      - task: AzurePowerShell@5
+
+        enabled: false
+
+        displayName: 'Approve Private endpoints from Acceptance remz02a01dl=
+s.0637e949-fc95-4a6a-a027-98b91aaab1d1'
+
+        inputs:
+
+          azureSubscription: $(AzureSubscription)
+
+          ScriptType: 'InlineScript'
+
+          azurePowerShellVersion: 'LatestVersion'
+
+          Inline: |
+
+            # Define variables
+
+            $resourceGroupName =3D "${{ variables.resourceGroup }}"
+
+            $privateEndpointConnectionName =3D "remz02a01dls.0637e949-fc95-=
+4a6a-a027-98b91aaab1d1"
+
+            $resourceName =3D "remz02a01dls"
+
+            $resourceType =3D "Microsoft.Storage/storageAccounts"
+
+
+
+            Approve-AzPrivateEndpointConnection -Name $privateEndpointConne=
+ctionName -ResourceGroupName $resourceGroupName -ServiceName $resourceName =
+-PrivateLinkResourceType $resourceType
+
+
+
+      - task: AzurePowerShell@5
+
+        enabled: false
+
+        displayName: 'Approve Private endpoints for Production remz02p01dls=
+.cde35cfd-b3e2-4776-bb48-6d7484e52c8e'
+
+        inputs:
+
+          azureSubscription: $(AzureSubscription)
+
+          ScriptType: 'InlineScript'
+
+          azurePowerShellVersion: 'LatestVersion'
+
+          Inline: |
+
+            # Define variables
+
+            $resourceGroupName =3D "${{ variables.resourceGroup }}"
+
+            $privateEndpointConnectionName =3D "remz02p01dls.cde35cfd-b3e2-=
+4776-bb48-6d7484e52c8e"
+
+            $resourceName =3D "remz02p01dls"
+
+            $resourceType =3D "Microsoft.Storage/storageAccounts"
+
+
+
+            Approve-AzPrivateEndpointConnection -Name $privateEndpointConne=
+ctionName -ResourceGroupName $resourceGroupName -ServiceName $resourceName =
+-PrivateLinkResourceType $resourceType
+
+
+
+  # Closing the abobe SNOW ticket if the deplopment is for - acceptance/pro=
+duction
+
+  - ${{ if in(parameters.environment, 'acceptance', 'production') }}:
+
+        - template: /generic/servicenow/close-change.yml@templates
+
+          parameters:
+
+              depends_on_job: Deploy_ADF
+
+
+
+This message contains information that may be privileged or confidential an=
+d is the property of the Capgemini Group. It is intended only for the perso=
+n to whom it is addressed. If you are not the intended recipient, you are n=
+ot authorized to read, print, retain, copy, disseminate, distribute, or use=
+ this message or any part thereof. If you receive this message in error, pl=
+ease notify the sender immediately and delete all copies of this message.
+
+--_000_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_
+MIME-Version: 1.0
+Content-Type: text/html; charset="windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 11pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+sample...</div>
+<div id=3D"Signature">
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 11pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<p style=3D"background-color: white;"><span style=3D"font-family: Verdana, =
+sans-serif; color: rgb(0, 112, 173);"><b>=97&nbsp;</b></span></p>
+<p style=3D"background-color: white;"><span style=3D"font-family: Verdana, =
+sans-serif; color: rgb(68, 84, 106);">Thanks &amp; Regards,</span></p>
+<p style=3D"background-color: white;"><span style=3D"font-family: Verdana, =
+sans-serif; color: rgb(0, 112, 173);"><b>Saileswar Saha
+</b></span><span style=3D"font-family: Verdana, sans-serif; color: rgb(5, 9=
+9, 193);"><b><a style=3D"color: rgb(5, 99, 193); margin-top: 0px; margin-bo=
+ttom: 0px;" class=3D"OWAAutoLink" id=3D"OWAb9b4118f-3e03-867b-11bf-327fab99=
+0e3d" href=3D"https://www.linkedin.com/in/saileswarsaha/"><img style=3D"wid=
+th: 0.116in; height: 0.108in; margin-top: 0px; margin-bottom: 0px;" height=
+=3D"10" width=3D"11" data-outlook-trace=3D"F:1|T:1" src=3D"cid:bdc28a57-32d=
+0-4b31-b194-8107d84bb896"></a></b></span></p>
+<p><span style=3D"color: rgb(68, 84, 106);">&nbsp;</span></p>
+<table style=3D"background-color: white; margin-right: 6.75pt; margin-left:=
+ 6.75pt; box-sizing: border-box; border-collapse: collapse; border-spacing:=
+ 0px;" cellpadding=3D"0" cellspacing=3D"0" align=3D"left">
+<tbody>
+<tr>
+<td style=3D"border-right: 1pt solid windowtext; padding: 0cm 5.4pt; vertic=
+al-align: top; width: 90.45pt; height: 54pt;">
+<p><span style=3D"color: rgb(68, 84, 106);"><img style=3D"width: 1.391in; h=
+eight: 0.308in; margin-top: 0px; margin-bottom: 0px;" height=3D"29" width=
+=3D"133" alt=3D"14305E5A" data-outlook-trace=3D"F:1|T:1" src=3D"cid:cdd3918=
+a-1fc6-49a6-a2d0-3f600942d29a"></span></p>
+<p><span style=3D"font-size: 8pt; color: rgb(0, 155, 204);"><b>People matte=
+r, results count</b></span></p>
+<p><span style=3D"font-family: Verdana, sans-serif; font-size: 8pt; color: =
+rgb(68, 84, 106);"><a style=3D"margin-top: 0px; margin-bottom: 0px;" class=
+=3D"OWAAutoLink" id=3D"OWA768f9dee-6d44-8179-0c3d-dccc0c9f60fb" href=3D"htt=
+p://www.capgemini.com/">www.capgemini.com</a></span></p>
+<p><span style=3D"font-family: Verdana, sans-serif; font-size: 8pt; color: =
+rgb(68, 84, 106);">&nbsp;</span></p>
+<p style=3D"text-align: justify;"><span style=3D"color: rgb(68, 84, 106);">=
+<a style=3D"color: rgb(68, 84, 106); margin-top: 0px; margin-bottom: 0px;" =
+class=3D"OWAAutoLink" id=3D"OWA1472a38b-9760-389b-0724-6bc76b4c7cce" href=
+=3D"https://twitter.com/capgemini"><img style=3D"width: 0.25in; height: 0.2=
+5in; margin-top: 0px; margin-bottom: 0px;" height=3D"24" width=3D"24" data-=
+outlook-trace=3D"F:1|T:1" src=3D"cid:0023e5dc-0100-4533-9a3f-044e00953cf1">=
+</a></span><span style=3D"font-family: Verdana, sans-serif; font-size: 4pt;=
+ color: rgb(0, 194, 122);">&nbsp;</span><span style=3D"color: rgb(68, 84, 1=
+06);"><a style=3D"color: rgb(68, 84, 106); margin-top: 0px; margin-bottom: =
+0px;" class=3D"OWAAutoLink" id=3D"OWAfa725642-f4e8-4403-fd7b-2d9cdd09705c" =
+href=3D"https://www.linkedin.com/company/capgemini"><img style=3D"width: 0.=
+25in; height: 0.25in; margin-top: 0px; margin-bottom: 0px;" height=3D"24" w=
+idth=3D"24" data-outlook-trace=3D"F:1|T:1" src=3D"cid:29c71a54-f193-44ed-95=
+30-e775018c163b"></a></span><span style=3D"font-family: Verdana, sans-serif=
+; font-size: 4pt; color: rgb(0, 194, 122);">&nbsp;</span><span style=3D"col=
+or: rgb(68, 84, 106);"><a style=3D"color: rgb(68, 84, 106); margin-top: 0px=
+; margin-bottom: 0px;" class=3D"OWAAutoLink" id=3D"OWA3ae2a71d-8739-7599-d3=
+df-204c3fda5ec7" href=3D"https://www.facebook.com/capgemini"><img style=3D"=
+width: 0.25in; height: 0.25in; margin-top: 0px; margin-bottom: 0px;" height=
+=3D"24" width=3D"24" data-outlook-trace=3D"F:1|T:1" src=3D"cid:32edf7b4-835=
+6-4824-9f79-964eb7a70626"></a></span><span style=3D"font-family: Verdana, s=
+ans-serif; font-size: 4pt; color: rgb(0, 194, 122);">&nbsp;</span><span sty=
+le=3D"color: rgb(68, 84, 106);"><a style=3D"color: rgb(68, 84, 106); margin=
+-top: 0px; margin-bottom: 0px;" class=3D"OWAAutoLink" id=3D"OWA6dc59502-c08=
+e-fbba-f35b-ea4755891b6d" href=3D"https://www.youtube.com/profile?user=3Dca=
+pgeminimedia"><img style=3D"width: 0.25in; height: 0.25in; margin-top: 0px;=
+ margin-bottom: 0px;" height=3D"24" width=3D"24" data-outlook-trace=3D"F:1|=
+T:1" src=3D"cid:d9cca2eb-cc7b-46f1-9541-abc7edaced76"></a></span><span styl=
+e=3D"font-family: Verdana, sans-serif; font-size: 4pt; color: rgb(0, 194, 1=
+22);">&nbsp;
+</span><span style=3D"color: rgb(68, 84, 106);"><a style=3D"color: rgb(68, =
+84, 106); margin-top: 0px; margin-bottom: 0px;" class=3D"OWAAutoLink" id=3D=
+"OWA7490197e-12f2-28e5-036b-61c41dd96b9e" href=3D"https://www.instagram.com=
+/capgemini"><img style=3D"width: 0.25in; height: 0.25in; margin-top: 0px; m=
+argin-bottom: 0px;" height=3D"24" width=3D"24" data-outlook-trace=3D"F:1|T:=
+1" src=3D"cid:9af87449-3496-4791-be0b-b77d29479f50"></a></span><span style=
+=3D"font-family: Verdana, sans-serif; font-size: 4pt; color: rgb(0, 194, 12=
+2);">&nbsp;</span></p>
+<table style=3D"width: 75pt; box-sizing: border-box; border-collapse: colla=
+pse; border-spacing: 0px;" cellpadding=3D"0" cellspacing=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding: 0cm;"></td>
+<td style=3D"padding: 0cm;"></td>
+<td style=3D"padding: 0cm;"></td>
+<td style=3D"padding: 0cm;"></td>
+<td style=3D"padding: 0cm;"></td>
+<td style=3D"padding: 0cm;"></td>
+<td style=3D"padding: 0cm;"></td>
+<td style=3D"padding: 0cm;"></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td style=3D"padding: 0cm 5.4pt; vertical-align: top; width: 307.35pt; heig=
+ht: 54pt;">
+<p><span style=3D"font-family: Verdana, sans-serif; font-size: 8pt; color: =
+gray;">Cloud Solutions Architect</span><span style=3D"font-family: Verdana,=
+ sans-serif; font-size: 8pt; color: black;">&nbsp;</span><span style=3D"fon=
+t-family: Verdana, sans-serif; font-size: 8pt; color: gray; background-colo=
+r: white;">|</span><span style=3D"font-family: Verdana, sans-serif; font-si=
+ze: 8pt; color: black; background-color: white;">&nbsp;</span><span style=
+=3D"font-family: Verdana, sans-serif; font-size: 8pt; color: gray; backgrou=
+nd-color: white;">Azure
+ Solution Architect Expert</span></p>
+<p><span style=3D"font-family: Verdana, sans-serif; font-size: 8pt; color: =
+rgb(0, 112, 173);">Financial Services-FSSBU</span><span style=3D"font-famil=
+y: Verdana, sans-serif; font-size: 8pt; color: rgb(237, 125, 49);">&nbsp;</=
+span><span style=3D"font-family: Verdana, sans-serif; font-size: 8pt; color=
+: gray;">|
+</span><span style=3D"font-family: Verdana, sans-serif; font-size: 8pt; col=
+or: rgb(0, 112, 173);">Kolkata, India</span></p>
+<p><span style=3D"font-family: Verdana, sans-serif; font-size: 8pt; color: =
+gray;"><img style=3D"width: 0.125in; height: 0.125in; margin-top: 0px; marg=
+in-bottom: 0px;" height=3D"12" width=3D"12" data-outlook-trace=3D"F:1|T:1" =
+src=3D"cid:289a9e68-0633-415c-9796-dbe2d64022be">+91-9434692946&nbsp;|
+<img style=3D"width: 0.125in; height: 0.125in; margin-top: 0px; margin-bott=
+om: 0px;" height=3D"12" width=3D"12" data-outlook-trace=3D"F:1|T:1" src=3D"=
+cid:c205d940-b668-4383-b08f-194979a4bd73">&nbsp;<a style=3D"margin-top: 0px=
+; margin-bottom: 0px;" class=3D"OWAAutoLink" id=3D"OWAf6a83091-c8c0-c5ed-6e=
+57-069492d306e3" href=3D"mailto:saileswar.saha@capgemini.com">saileswar.sah=
+a@capgemini.com</a></span></p>
+<p><span style=3D"font-family: Verdana, sans-serif; font-size: 8pt; color: =
+rgb(0, 112, 173);">&nbsp;</span></p>
+<p><span style=3D"font-family: Verdana, sans-serif; font-size: 8pt; color: =
+rgb(0, 112, 173);">&nbsp;</span></p>
+<p><span style=3D"font-family: Verdana, sans-serif; font-size: 8pt; color: =
+rgb(0, 112, 173);">Upcoming PTO</span><span style=3D"font-family: Verdana, =
+sans-serif; font-size: 8pt; color: rgb(34, 34, 34);">&nbsp;:
+<b>NA</b></span><span style=3D"font-family: Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(34, 34, 34);">&nbsp;</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</div>
+<div id=3D"appendonsend"></div>
+<div><br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<hr style=3D"display: inline-block; width: 98%;">
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+<b><br>
+</b></div>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+trigger: none</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+parameters:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; - name: environment</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; default: test</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; values:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; - test</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; - acceptance</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; - production</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+resources:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; repositories:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - repository: adf-publish</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; type: git</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; name: rezo-infra-adf</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; ref: adf_publish</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - repository: adf-code</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; type: git</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; name: rezo-infra-adf</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; ref: $(Build.SourceBranch)</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - repository: templates</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; type: git</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; name: GRD0001045/pita-pipeline-templates</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+variables:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; - name: sourceDataFactoryName</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; value: remz02-d-01-df</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; - ${{ if eq(parameters.environment, 'test') }}:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - group: AbnAmro-remz02-adf-test-cicd</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: resourceGroup</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: remz02-t-rg</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: managedIdentityName</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: remz02-t-uami</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: databricksWorkspaceName</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: remz02-t-01-dbr</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: ADBRoleName</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: Contributor</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: azureEnvironment</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: remz02-t-rg-cicd01</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; - ${{ if eq(parameters.environment, 'acceptance') }}:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - group: AbnAmro-remz02-adf-acc-cicd</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: resourceGroup</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: remz02-a-rg</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: managedIdentityName</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: remz02-a-uami</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: databricksWorkspaceName</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: remz02-a-01-dbr</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: ADBRoleName</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: Contributor</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: azureEnvironment</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: remz02-a-rg-cicd01</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; - ${{ if eq(parameters.environment, 'production') }}:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - group: AbnAmro-remz02-adf-prod-cicd</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: resourceGroup</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: remz02-p-rg</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: managedIdentityName</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: remz02-p-uami</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: databricksWorkspaceName</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: remz02-p-01-dbr</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: ADBRoleName</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: Contributor</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - name: azureEnvironment</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; value: remz02-p-rg-cicd01</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+pool:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; vmImage: 'ubuntu-latest'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+stages:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+- stage: 'remz02_${{ parameters.environment }}_ADFCI'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; jobs:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; # Creating a SNOW ticket if the deplopment is for - acceptance/produ=
+ction</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; - ${{ if in(parameters.environment, 'acceptance', 'production') }}:<=
+/p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; - template: /generic/servicenow/create-change.yml@templates</=
+p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; parameters:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; app_config_id: CI0030792</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; app_version_number: '1.0.0'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; approval_environment: ${{ &nbsp;variables.azure=
+Environment }}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; description: Remediation ${{ parameters.environ=
+ment }} environment ADF Deployment - Repo $(Build.DefinitionName) with buil=
+d number $(Build.BuildNumber) at https://dev.azure.com/cbsp-abnamro/GRD0001=
+030/_git/rezo-infra-adf</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; # Actual job to deploy ADF in Azure</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; - job: Deploy_ADF &nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; displayName: 'Deploy ADF'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; dependsOn:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; - ${{ if in(parameters.environment, 'acceptance', 'pro=
+duction') }}:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; - SN_CreateChange</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; steps:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; - checkout: adf-publish</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; persistCredentials: true</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; clean: true</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; # These are all emanled tasks which are actually needed to deploy AD=
+F properly</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; # to all environments.</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; - task: PowerShell@2</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; enabled: true</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; displayName: 'Removing unnecessary entries from=
+ ARM Template'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; inputs:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; targetType: 'inline'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pwsh: true</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; script: |</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Define the path to the template=
+ file</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $templateFile =3D &quot;${{ varia=
+bles.sourceDataFactoryName }}/ARMTemplateForFactory.json&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Load the template</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $template =3D Get-Content -Raw -P=
+ath $templateFile | ConvertFrom-Json</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Host &quot;Totoal resources=
+ count before removal:- $($template.resources.Count)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Remove the unnecessary VNet sec=
+tion</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $template.resources =3D $template=
+.resources | Where-Object {</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -not ($_.&quot;type&quot; =
+-eq &quot;Microsoft.DataFactory/factories/managedVirtualNetworks&quot; -and=
+ $_.&quot;name&quot; -eq &quot;[concat(parameters('factoryName'), '/managed=
+PrivateEndpoint')]&quot;)</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Host &quot;Totoal resources=
+ count after removal:- $($template.resources.Count)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Save the modified template</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $template | ConvertTo-Json -Depth=
+ 100 | Set-Content -Path $templateFile -Force</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; - task: AzurePowerShell@5</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; enabled: true</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; displayName: 'Stoping all ADF triggers'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; inputs:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; azureSubscription: $(AzureSubscription)<=
+/p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ScriptType: 'InlineScript'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; azurePowerShellVersion: 'LatestVersion'<=
+/p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Inline: |</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Variables</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $resourceGroupName =3D &quot;${{ =
+variables.resourceGroup }}&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $dataFactoryName =3D &quot;$(data=
+FactoryName)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Get all triggers in the Data Fa=
+ctory</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $triggers =3D Get-AzDataFactoryV2=
+Trigger -ResourceGroupName $resourceGroupName -DataFactoryName $dataFactory=
+Name</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; foreach ($trigger in $triggers) {=
+</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Host &quot;Checking =
+Trigger:- $($trigger.Name)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if($trigger.Propert=
+ies.Pipelines.Count -eq 0)</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Host &=
+quot;$($trigger.Name) - trigger doesn't have any pipeline refferences. No n=
+eed to stop.&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Host &=
+quot;Trigger found and stoping.....&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Stop-AzDataF=
+actoryV2Trigger -ResourceGroupName $resourceGroupName -DataFactoryName $dat=
+aFactoryName -TriggerName $trigger.Name -Force</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Output=
+ &quot;Stopped trigger: $($trigger.Name)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; catch {</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Host $_</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Host &quot;$(=
+$trigger.Name) - trigger unable to stop or not found or errors happened. Pl=
+ease check the above error message.&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; - task: AzureResourceManagerTemplateDeployment@3</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; enabled: true</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; displayName: Deploy ARM template on ${{ paramet=
+ers.environment }} in $(resourceGroup)</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; inputs:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; azureResourceManagerConnection: $(AzureS=
+ubscription)</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; subscriptionId: ${{ variables.subscripti=
+onId }}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; resourceGroupName: ${{ variables.resourc=
+eGroup }}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; action: 'Create Or Update Resource Group=
+'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; location: West Europe</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; deploymentMode: 'Incremental'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; csmFile: ${{ variables.sourceDataFactory=
+Name }}/ARMTemplateForFactory.json</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; csmParametersFile: ${{ variables.sourceD=
+ataFactoryName }}/ARMTemplateParametersForFactory.json</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; deploymentName: Adf-$(dataFactoryName)-$=
+{{ parameters.environment }}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overrideparameters: &gt;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -factoryName &quot;$(dataF=
+actoryName)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -DialingestionData_propert=
+ies_parameters_SrcADLSPathWithContainer {&quot;type&quot;:&quot;string&quot=
+;,&quot;defaultValue&quot;:&quot;$(DialingestionData_properties_parameters_=
+SrcADLSPathWithContainer)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -DialingestionData_propert=
+ies_parameters_ADBWrkflowJobId {&quot;type&quot;:&quot;string&quot;,&quot;d=
+efaultValue&quot;:&quot;$(DialingestionData_properties_parameters_ADBWrkflo=
+wJobId)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -DialingestionData_propert=
+ies_parameters_ADBWrkSpaceURL {&quot;type&quot;:&quot;string&quot;,&quot;de=
+faultValue&quot;:&quot;$(ls_remz_adb_fixcluster_properties_parameters_ADBWr=
+kSpaceURL)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -DialingestionData_propert=
+ies_parameters_ADBWrkSpaceResourceID {&quot;type&quot;:&quot;string&quot;,&=
+quot;defaultValue&quot;:&quot;$(ls_remz_adb_fixcluster_properties_parameter=
+s_ADBWrkSpaceResourceID)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -DialingestionData_propert=
+ies_parameters_ADBClusterID {&quot;type&quot;:&quot;string&quot;,&quot;defa=
+ultValue&quot;:&quot;$(ls_remz_adb_fixcluster_properties_parameters_ADBClus=
+terID)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pickup_source_pro=
+perties_linkedServiceName_parameters_SrcStorageURI &quot;@dataset().SrcStgU=
+RL&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pickup_source_pro=
+perties_parameters_SrcContainerName {&quot;type&quot;:&quot;string&quot;,&q=
+uot;defaultValue&quot;:&quot;$(ds_dial_pickup_source_properties_parameters_=
+SrcContainerName)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pickup_source_pro=
+perties_parameters_SrcFolderPath {&quot;type&quot;:&quot;string&quot;,&quot=
+;defaultValue&quot;:&quot;$(ds_dial_pickup_source_properties_parameters_Src=
+FolderPath)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pickup_source_pro=
+perties_parameters_SrcFileName {&quot;type&quot;:&quot;string&quot;,&quot;d=
+efaultValue&quot;:&quot; &quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pickup_source_pro=
+perties_parameters_SrcStgURL {&quot;type&quot;:&quot;string&quot;,&quot;def=
+aultValue&quot;:&quot;$(ds_dial_pickup_source_properties_parameters_SrcStgU=
+RL)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pickup_target_pro=
+perties_linkedServiceName_parameters_DestStorageURI &quot;@dataset().target=
+StgURL&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pickup_target_pro=
+perties_parameters_targetContainerName {&quot;type&quot;:&quot;string&quot;=
+,&quot;defaultValue&quot;:&quot;$(ds_dial_pickup_target_properties_paramete=
+rs_targetContainerName)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pickup_target_pro=
+perties_parameters_targetFolderPath {&quot;type&quot;:&quot;string&quot;,&q=
+uot;defaultValue&quot;:&quot;$(ds_dial_pickup_target_properties_parameters_=
+targetFolderPath)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pickup_target_pro=
+perties_parameters_targetStgURL {&quot;type&quot;:&quot;string&quot;,&quot;=
+defaultValue&quot;:&quot;$(ds_dial_pickup_target_properties_parameters_targ=
+etStgURL)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pushto_source_pro=
+perties_linkedServiceName_parameters_SrcStorageURI &quot;@dataset().SrcStgU=
+RL&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pushto_source_pro=
+perties_parameters_SrcContainerName {&quot;type&quot;:&quot;string&quot;,&q=
+uot;defaultValue&quot;:&quot;$(ds_dial_pushto_source_properties_parameters_=
+SrcContainerName)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pushto_source_pro=
+perties_parameters_SrcFolderPath {&quot;type&quot;:&quot;string&quot;,&quot=
+;defaultValue&quot;:&quot;$(ds_dial_pushto_source_properties_parameters_Src=
+FolderPath)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pushto_source_pro=
+perties_parameters_SrcFileName {&quot;type&quot;:&quot;string&quot;,&quot;d=
+efaultValue&quot;:&quot; &quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pushto_source_pro=
+perties_parameters_SrcStgURL {&quot;type&quot;:&quot;string&quot;,&quot;def=
+aultValue&quot;:&quot;$(ds_dial_pushto_source_properties_parameters_SrcStgU=
+RL)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pushto_target_pro=
+perties_linkedServiceName_parameters_DestStorageURI &quot;@dataset().target=
+StgURL&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pushto_target_pro=
+perties_parameters_targetContainerName {&quot;type&quot;:&quot;string&quot;=
+,&quot;defaultValue&quot;:&quot;$(ds_dial_pushto_target_properties_paramete=
+rs_targetContainerName)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pushto_target_pro=
+perties_parameters_targetFolderPath {&quot;type&quot;:&quot;string&quot;,&q=
+uot;defaultValue&quot;:&quot;$(ds_dial_pushto_target_properties_parameters_=
+targetFolderPath)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_dial_pushto_target_pro=
+perties_parameters_targetStgURL {&quot;type&quot;:&quot;string&quot;,&quot;=
+defaultValue&quot;:&quot;$(ds_dial_pushto_target_properties_parameters_targ=
+etStgURL)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_famas_source_propertie=
+s_linkedServiceName_parameters_StorageURL &quot;@dataset().SrcStgURL&quot; =
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_famas_source_propertie=
+s_parameters_SrcContainerName {&quot;type&quot;:&quot;string&quot;,&quot;de=
+faultValue&quot;:&quot;$(ds_famas_source_properties_parameters_SrcContainer=
+Name)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_famas_source_propertie=
+s_parameters_SrcFolderPath {&quot;type&quot;:&quot;string&quot;,&quot;defau=
+ltValue&quot;:&quot;$(ds_famas_source_properties_parameters_SrcFolderPath)&=
+quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_famas_source_propertie=
+s_parameters_SrcFileName {&quot;type&quot;:&quot;string&quot;,&quot;default=
+Value&quot;:&quot; &quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_famas_source_propertie=
+s_parameters_SrcStgURL {&quot;type&quot;:&quot;string&quot;,&quot;defaultVa=
+lue&quot;:&quot;$(ds_famas_source_properties_parameters_SrcStgURL)&quot;}</=
+p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_famas_target_propertie=
+s_linkedServiceName_parameters_DestStorageURI &quot;@dataset().targetStgURL=
+&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_famas_target_propertie=
+s_parameters_targetContainerName {&quot;type&quot;:&quot;string&quot;,&quot=
+;defaultValue&quot;:&quot;$(ds_famas_target_properties_parameters_targetCon=
+tainerName)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_famas_target_propertie=
+s_parameters_targetFolderPath {&quot;type&quot;:&quot;string&quot;,&quot;de=
+faultValue&quot;:&quot;$(ds_famas_target_properties_parameters_targetFolder=
+Path)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_famas_target_propertie=
+s_parameters_targetStgURL {&quot;type&quot;:&quot;string&quot;,&quot;defaul=
+tValue&quot;:&quot;$(ds_famas_target_properties_parameters_targetStgURL)&qu=
+ot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_nCil_source_properties=
+_linkedServiceName_parameters_SrcStorageURI &quot;@dataset().SrcStgURL&quot=
+;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_nCil_source_properties=
+_parameters_SrcContainerName {&quot;type&quot;:&quot;string&quot;,&quot;def=
+aultValue&quot;:&quot;$(ds_nCil_source_properties_parameters_SrcContainerNa=
+me)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_nCil_source_properties=
+_parameters_SrcFolderPath {&quot;type&quot;:&quot;string&quot;,&quot;defaul=
+tValue&quot;:&quot;$(ds_nCil_source_properties_parameters_SrcFolderPath)&qu=
+ot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_nCil_source_properties=
+_parameters_SrcFileName {&quot;type&quot;:&quot;string&quot;,&quot;defaultV=
+alue&quot;:&quot; &quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_nCil_source_properties=
+_parameters_SrcStgURL {&quot;type&quot;:&quot;string&quot;,&quot;defaultVal=
+ue&quot;:&quot;$(ds_nCil_source_properties_parameters_SrcStgURL)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_nCil_target_properties=
+_linkedServiceName_parameters_DestStorageURI &quot;@dataset().targetStgURL&=
+quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_nCil_target_properties=
+_parameters_targetContainerName {&quot;type&quot;:&quot;string&quot;,&quot;=
+defaultValue&quot;:&quot;$(ds_nCil_target_properties_parameters_targetConta=
+inerName)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_nCil_target_properties=
+_parameters_targetFolderPath {&quot;type&quot;:&quot;string&quot;,&quot;def=
+aultValue&quot;:&quot;$(ds_nCil_target_properties_parameters_targetFolderPa=
+th)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_nCil_target_properties=
+_parameters_targetStgURL {&quot;type&quot;:&quot;string&quot;,&quot;default=
+Value&quot;:&quot;$(ds_nCil_target_properties_parameters_targetStgURL)&quot=
+;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_ihvolume_inbound_prope=
+rties_parameters_targetStorageURL {&quot;type&quot;:&quot;string&quot;,&quo=
+t;defaultValue&quot;:&quot;$(ds_ihvolume_inbound_properties_parameters_targ=
+etStorageURL)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_ihvolume_inbound_prope=
+rties_linkedServiceName_parameters_SrcStorageURI &quot;@dataset().targetSto=
+rageURL&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_ihvolume_outbound_prop=
+erties_parameters_sourceStorageURL {&quot;type&quot;:&quot;string&quot;,&qu=
+ot;defaultValue&quot;:&quot;$(ds_ihvolume_outbound_properties_parameters_so=
+urceStorageURL)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_ihvolume_outbound_prop=
+erties_linkedServiceName_parameters_SrcStorageURI &quot;@dataset().sourceSt=
+orageURL&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_nondial_inbound_proper=
+ties_parameters_targetStorageURL {&quot;type&quot;:&quot;string&quot;,&quot=
+;defaultValue&quot;:&quot;$(ds_nondial_inbound_properties_parameters_target=
+StorageURL)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_nondial_inbound_proper=
+ties_linkedServiceName_parameters_SrcStorageURI &nbsp;&quot;@dataset().targ=
+etStorageURL&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_nondial_outbound_prope=
+rties_parameters_sourceStorageURL {&quot;type&quot;:&quot;string&quot;,&quo=
+t;defaultValue&quot;:&quot;$(ds_nondial_outbound_properties_parameters_sour=
+ceStorageURL)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_nondial_outbound_prope=
+rties_linkedServiceName_parameters_SrcStorageURI &quot;@dataset().sourceSto=
+rageURL&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_ecm_source_properties_=
+linkedServiceName_parameters_SrcStorageURI &quot;@dataset().SrcStgURL&quot;=
+</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_ecm_source_properties_=
+parameters_SrcStgURL {&quot;type&quot;:&quot;string&quot;,&quot;defaultValu=
+e&quot;:&quot;$(ds_ecm_source_properties_parameters_SrcStgURL)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_ecm_target_properties_=
+linkedServiceName_parameters_SrcStorageURI &quot;@dataset().targetStgURL&qu=
+ot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_ecm_target_properties_=
+parameters_targetContainerName {&quot;type&quot;:&quot;string&quot;,&quot;d=
+efaultValue&quot;:&quot;$(ds_ecm_target_properties_parameters_targetContain=
+erName)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_ecm_target_properties_=
+parameters_targetStgURL {&quot;type&quot;:&quot;string&quot;,&quot;defaultV=
+alue&quot;:&quot;$(ds_ecm_target_properties_parameters_targetStgURL)&quot;}=
+</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ds_ecm_target_properties_=
+parameters_targetFolderPath {&quot;type&quot;:&quot;string&quot;,&quot;defa=
+ultValue&quot;:&quot;$(ds_ecm_target_properties_parameters_targetFolderPath=
+)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ls_remz_adb_fixcluster_pr=
+operties_typeProperties_credential_referenceName &quot;$(ls_remz_adb_fixclu=
+ster_properties_typeProperties_credential_referenceName)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ls_remz_adb_fixcluster_pr=
+operties_parameters_ADBWrkSpaceURL {&quot;type&quot;:&quot;string&quot;,&qu=
+ot;defaultValue&quot;:&quot;$(ls_remz_adb_fixcluster_properties_parameters_=
+ADBWrkSpaceURL)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ls_remz_adb_fixcluster_pr=
+operties_parameters_ADBWrkSpaceResourceID {&quot;type&quot;:&quot;string&qu=
+ot;,&quot;defaultValue&quot;:&quot;$(ls_remz_adb_fixcluster_properties_para=
+meters_ADBWrkSpaceResourceID)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ls_remz_adb_fixcluster_pr=
+operties_parameters_ADBClusterID {&quot;type&quot;:&quot;string&quot;,&quot=
+;defaultValue&quot;:&quot;$(ls_remz_adb_fixcluster_properties_parameters_AD=
+BClusterID)&quot;}</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ls_remz_export_source_pro=
+perties_typeProperties_url &quot;@{linkedService().SrcStorageURI}&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ls_remz_export_source_pro=
+perties_typeProperties_credential_referenceName &quot;$(ls_remz_export_sour=
+ce_properties_typeProperties_credential_referenceName)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ls_remz_export_target_pro=
+perties_typeProperties_url &quot;@{linkedService().DestStorageURI}&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ls_remz_export_target_pro=
+perties_typeProperties_credential_referenceName &quot;$(ls_remz_export_targ=
+et_properties_typeProperties_credential_referenceName)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ls_remz_stg_source_proper=
+ties_typeProperties_serviceEndpoint &quot;@{linkedService().StorageURL}&quo=
+t;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -ls_remz_stg_source_proper=
+ties_typeProperties_credential_referenceName &quot;$(ls_remz_stg_source_pro=
+perties_typeProperties_credential_referenceName)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -tr-dial-source_properties=
+_typeProperties_scope &quot;$(tr-dial-source_properties_typeProperties_scop=
+e)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -tr-famas-source_propertie=
+s_typeProperties_scope &quot;$(tr-famas-source_properties_typeProperties_sc=
+ope)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -tr-ncil-source_properties=
+_typeProperties_scope &quot;$(tr-ncil-source_properties_typeProperties_scop=
+e)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -tr-nondial-outbound_prope=
+rties_typeProperties_scope &quot;$(tr-nondial-outbound_properties_typePrope=
+rties_scope)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -tr-ihvolume-famas_propert=
+ies_typeProperties_scope &quot;$(tr-ihvolume-famas_properties_typePropertie=
+s_scope)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -tr-dialingestion-source_p=
+roperties_typeProperties_scope &quot;$(tr-dialingestion-source_properties_t=
+ypeProperties_scope)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -tr-remendo-outbound_prope=
+rties_typeProperties_scope &quot;$(tr-remendo-outbound_properties_typePrope=
+rties_scope)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -AutoResolveIntegrationRun=
+time_properties_typeProperties_computeProperties_location &quot;$(AutoResol=
+veIntegrationRuntime_properties_typeProperties_computeProperties_location)&=
+quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -cred_remz_uami_name &quot=
+;$(dataFactoryName)/$(cred_remz_uami_name)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -cred_remz_uami_properties=
+_typeProperties_resourceId &quot;$(cred_remz_uami_properties_typeProperties=
+_resourceId)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -DialTargetStgPLE_properti=
+es_privateLinkResourceId &quot;$(DialTargetStgPLE_properties_privateLinkRes=
+ourceId)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -DialTargetStgPLE_properti=
+es_groupId &quot;$(DialTargetStgPLE_properties_groupId)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -FAMASTargetStgPLE_propert=
+ies_privateLinkResourceId &quot;$(FAMASTargetStgPLE_properties_privateLinkR=
+esourceId)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -FAMASTargetStgPLE_propert=
+ies_groupId &quot;$(FAMASTargetStgPLE_properties_groupId)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -nCilTargetStoragePLE_prop=
+erties_privateLinkResourceId &quot;$(nCilTargetStoragePLE_properties_privat=
+eLinkResourceId)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -nCilTargetStoragePLE_prop=
+erties_groupId &quot;$(nCilTargetStoragePLE_properties_groupId)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -RemendoTargetSQLPLE_prope=
+rties_privateLinkResourceId &quot;$(RemendoTargetSQLPLE_properties_privateL=
+inkResourceId)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -RemendoTargetSQLPLE_prope=
+rties_groupId &quot;$(RemendoTargetSQLPLE_properties_groupId)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -remz02ple_properties_priv=
+ateLinkResourceId &quot;$(remz02ple_properties_privateLinkResourceId)&quot;=
+</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -remz02ple_properties_grou=
+pId &quot;$(remz02ple_properties_groupId)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -remz02ple_properties_fqdn=
+s $(remz02ple_properties_fqdns)</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; - task: AzurePowerShell@5</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; enabled: true</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; displayName: 'Starting all ADF triggers'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; inputs:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; azureSubscription: $(AzureSubscription)<=
+/p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ScriptType: 'InlineScript'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; azurePowerShellVersion: 'LatestVersion'<=
+/p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Inline: |</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Variables</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $resourceGroupName =3D &quot;${{ =
+variables.resourceGroup }}&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $dataFactoryName =3D &quot;$(data=
+FactoryName)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Get all triggers in the Data Fa=
+ctory</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $triggers =3D Get-AzDataFactoryV2=
+Trigger -ResourceGroupName $resourceGroupName -DataFactoryName $dataFactory=
+Name</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; foreach ($trigger in $triggers) {=
+</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Host &quot;Checking =
+Trigger:- $($trigger.Name)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if($trigger.Propert=
+ies.Pipelines.Count -eq 0)</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Host &=
+quot;$($trigger.Name) - trigger doesn't have any pipeline refferences. No n=
+eed to start.&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Host &=
+quot;Trigger found and starting.....&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Start-AzData=
+FactoryV2Trigger -ResourceGroupName $resourceGroupName -DataFactoryName $da=
+taFactoryName -TriggerName $trigger.Name -Force</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Output=
+ &quot;Started trigger: $($trigger.Name)&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; catch {</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Host $_</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Write-Host &quot;$(=
+$trigger.Name) - trigger unable to start or not found or errors happened. P=
+lease check the above error message.&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; # These are all disabled tasks which are needed to be used for clean=
+up stuff</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; # Please enable them only when you want to delete/remobe below items=
+</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; # Before that Please disable all above tasks.</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; - task: AzurePowerShell@5</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; enabled: false</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; displayName: 'Removing Private endpoints for ${=
+{ parameters.environment }} Storage'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; inputs:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; azureSubscription: $(AzureSubscription)<=
+/p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ScriptType: 'InlineScript'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; azurePowerShellVersion: 'LatestVersion'<=
+/p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Inline: |</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Define variables</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $resourceGroupName =3D &quot;${{ =
+variables.resourceGroup }}&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $privateEndpointConnectionName =
+=3D &quot;remz02a01dls.0f262297-4172-4959-83cd-ea11d635f357&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $resourceName =3D &quot;remz02a01=
+dls&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $resourceType =3D &quot;Microsoft=
+.Storage/storageAccounts&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Remove-AzPrivateEndpointConnectio=
+n -Name $privateEndpointConnectionName -ResourceGroupName $resourceGroupNam=
+e -ServiceName $resourceName -PrivateLinkResourceType $resourceType
+ -Force</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; - task: AzureCLI@2</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; enabled: false</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; displayName: 'Remove ADF managed PLE - remz02-p=
+-01-df.nCilTargetStoragePLE'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; inputs:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; azureSubscription: $(AzureSubscription)<=
+/p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; scriptType: 'bash'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; scriptLocation: 'inlineScript'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; inlineScript: |</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Define variables</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; az datafactory managed-private-en=
+dpoint delete --factory-name &quot;remz02-p-01-df&quot; --name &quot;nCilTa=
+rgetStoragePLE&quot; --managed-virtual-network-name &quot;default&quot; --r=
+esource-group &quot;remz02-p-rg&quot;
+ --yes</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; - task: AzurePowerShell@5</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; enabled: false</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; displayName: 'Approve Private endpoints from Ac=
+ceptance remz02a01dls.0637e949-fc95-4a6a-a027-98b91aaab1d1'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; inputs:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; azureSubscription: $(AzureSubscription)<=
+/p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ScriptType: 'InlineScript'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; azurePowerShellVersion: 'LatestVersion'<=
+/p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Inline: |</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Define variables</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $resourceGroupName =3D &quot;${{ =
+variables.resourceGroup }}&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $privateEndpointConnectionName =
+=3D &quot;remz02a01dls.0637e949-fc95-4a6a-a027-98b91aaab1d1&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $resourceName =3D &quot;remz02a01=
+dls&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $resourceType =3D &quot;Microsoft=
+.Storage/storageAccounts&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Approve-AzPrivateEndpointConnecti=
+on -Name $privateEndpointConnectionName -ResourceGroupName $resourceGroupNa=
+me -ServiceName $resourceName -PrivateLinkResourceType $resourceType</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; - task: AzurePowerShell@5</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; enabled: false</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; displayName: 'Approve Private endpoints for Pro=
+duction remz02p01dls.cde35cfd-b3e2-4776-bb48-6d7484e52c8e'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; inputs:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; azureSubscription: $(AzureSubscription)<=
+/p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ScriptType: 'InlineScript'</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; azurePowerShellVersion: 'LatestVersion'<=
+/p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Inline: |</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Define variables</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $resourceGroupName =3D &quot;${{ =
+variables.resourceGroup }}&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $privateEndpointConnectionName =
+=3D &quot;remz02p01dls.cde35cfd-b3e2-4776-bb48-6d7484e52c8e&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $resourceName =3D &quot;remz02p01=
+dls&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $resourceType =3D &quot;Microsoft=
+.Storage/storageAccounts&quot;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Approve-AzPrivateEndpointConnecti=
+on -Name $privateEndpointConnectionName -ResourceGroupName $resourceGroupNa=
+me -ServiceName $resourceName -PrivateLinkResourceType $resourceType</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; # Closing the abobe SNOW ticket if the deplopment is for - acceptanc=
+e/production</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; - ${{ if in(parameters.environment, 'acceptance', 'production') }}:<=
+/p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; - template: /generic/servicenow/close-change.ym=
+l@templates</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; parameters:</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; depends_on_job: Deploy_ADF=
+</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;">=
+&nbsp;</p>
+<p style=3D"margin: 0cm; font-family: Aptos, sans-serif; font-size: 12pt;" =
+class=3D"elementToProof">
+<span style=3D"color: rgb(0, 0, 0);"><br>
+</span></p>
+<span style=3D"font-size: 9px;">This message contains information that may =
+be privileged or confidential and is the property of the Capgemini Group. I=
+t is intended only for the person to whom it is addressed. If you are not t=
+he intended recipient, you are not authorized to read, print, retain, copy,=
+ disseminate, distribute, or use this message or any part thereof. If you r=
+eceive this message in error, please notify the sender immediately and dele=
+te all copies of this message.</span></body>
+</html>
+
+--_000_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_--
+
+--_012_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_
+Content-Type: image/jpg; name="Outlook-rmghohun"
+Content-Description: Outlook-rmghohun
+Content-Disposition: inline; filename="Outlook-rmghohun"; size=411;
+	creation-date="Fri, 13 Jun 2025 15:26:38 GMT";
+	modification-date="Fri, 13 Jun 2025 15:26:38 GMT"
+Content-ID: <bdc28a57-32d0-4b31-b194-8107d84bb896>
+Content-Transfer-Encoding: base64
+
+/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+HBwgJC4nICIsIxwVKDcpLDAxKDQ0Hyc5PSwyPC4nNDIBCQkJDAsMGA0NGC0hHCEyMjIyMjIyJjIy
+MjIyMjIyLCYyMiYyMioyLTIoMiYmMjIyMyoyJigyMjImLi0mJiomMv/AABEIAAoACwMBEQACEQED
+EQH/xAAWAAADAAAAAAAAAAAAAAAAAAAEBQb/xAAiEAABAwMEAwEAAAAAAAAAAAACAQMEBREhABIT
+MkJhoQb/xAAYAQACAwAAAAAAAAAAAAAAAAADBAIFBv/EAB0RAAEEAgMAAAAAAAAAAAAAAAIAAREy
+AxMEIfD/2gAMAwEAAhEDEQA/ADYf52HUKLTZMp5Y4DGausdhFIlceUE3LfPjnV5uLY8e6WZfjAQS
+oStQigVubDtycDxNb9nbatr/ADUCyOTyihhgYRLcl8WQFH3EGzeENbd76YG6Wx1SaqOGdSfIjIiV
+cqq+tDyWdPBVl//Z
+
+--_012_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_
+Content-Type: image/png; name="Outlook-14305E5A.png"
+Content-Description: Outlook-14305E5A.png
+Content-Disposition: inline; filename="Outlook-14305E5A.png"; size=5191;
+	creation-date="Fri, 13 Jun 2025 15:26:38 GMT";
+	modification-date="Fri, 13 Jun 2025 15:26:38 GMT"
+Content-ID: <cdd3918a-1fc6-49a6-a2d0-3f600942d29a>
+Content-Transfer-Encoding: base64
+
+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
+rkJggg==
+
+--_012_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_
+Content-Type: image/png; name="Outlook-itmfatud.png"
+Content-Description: Outlook-itmfatud.png
+Content-Disposition: inline; filename="Outlook-itmfatud.png"; size=1521;
+	creation-date="Fri, 13 Jun 2025 15:26:38 GMT";
+	modification-date="Fri, 13 Jun 2025 15:26:38 GMT"
+Content-ID: <0023e5dc-0100-4533-9a3f-044e00953cf1>
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAlwSFlzAAAO
+xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAAVwSURBVEhL
+fVZdbFRFFD4zd+7flt3uFijyZysgtoYEbAqIlpiAD5IGEjSKhpgYAw9qfDGE+IDior4g8mBMTFRQ
+n5qoiQ+V+KCBkD40hUL4qXalaEixlhbaXXbb3bv3Z8ZzprstxdVJbnbvvTPf+c53vjNzRTqdhlrj
+cGsrfx52tIi4s5VLtS0Mg40yKD8IwIAL66aw7D5usjOhV+zpKv2USQ8Oylo4otbDTNtbm/Y6sX1M
+sk4p5TLFFICqrtf/mxXI5ijie7hZN/qy89yPmTb/y5aLR8/dj/evAJn2g68gu0PA2erI9yH0SqBm
+wWeWyygAWQyAMQ6G4y41TGu/4drbce0HXZ3d36TTc9nMC4ATDhjCSkvFYn42i0QlMM5rSkgPKXAw
+XYCwxMFKpFYhsU9f6t65+PDOFz5C6TFVgNkAmfYDrxqW/Z6MVCzIT2rQ/wOvRtVzlAL/7iSY8WRM
+OM67e09NT0D/sROzAQZa39xocfMdUFAXFHKIzP6TdfVFpPkBGDS1Mp/W8vpUHSDWpYdfG9gw9Fmf
+6E1uEgsTC/YbptnsZQlcE4IQL4Hk7g8l8bkXzr3zcTIjZ+FEE+f7+bvgpJJNbkNyH2JfEKmVHWuU
+ZLtCz0fgCBQVDidbBsBUMAMkKlGItR8BbHyAQccKBEXyfaMKrucUJCyAW0UG5SBCY/gAnO+Kr9x8
+XIArtuLUJUFpmkTX7FYuYPDsIwzODivo/VuBg5Wy8SLwzUsZvLGBQ8phQNm0NQJMegou31bw/TUJ
+EjHIeSIWb3Ts+FYBEWyTDJlXrEiLaDzWyGAdXot+k9A7ouCONyPXk8sZpFwG+cp9zASImQx6MRMi
+QHM0lsRMVLRdSN/fQsyrg3QcKyk4jwueWc3h9fUGPLVcwYVxBbemFTQiuI/SVXho7W/kFZwellrS
+OEpF7yK/jL/R40LKaAXeznONi3KQ3lMlLBzWYv1izAYv7C1tAJKxajSqV6EMkEfZqV7VQc2Is5bP
+azRKjySKMMNFLqZuYxBc7GH8auFDyr5CvxrkNtagjHOqZriXreCG8ReWvIki0joHGReQzbe/Y1Og
+vg8lZgDpIo3nLUZGBHxlHH8xqwQSmpXOMEmiEcFtqxeU0SRLlNJM6iQLWW+kIGHdQq6lob64f7hI
+4Mq4hH68bFxDa0lCGrgr4FYT9qGLwjO4/b5IGxdVn96THGhnOH1TQj3acW2SmghtWYlAUsYRPIdO
+ImvSry7urHQcfWOgo9QvIswWesxFzphw3CV+saB7gZyEBGAoq+DnGxKWPMphWR0GxQiUHbGdRAOc
+GJBwYYxsOpcbkTTdOiQqx4PpiR5RyF4eali8vVvY1r6gZCBzCXFk/cQyDm3YsWuSTHcpsaPAZMVL
+Ywp+uC51c8XQJno/okHbBjNAuBaEQdBdGL08JLbkzoUDpY7PsZufdhL1zTKX1SADd3ArxiSH8wxs
+BCbbTmB//IG1GcTNdiogEzANfm957EQ99kAwXCqWvyBsbdN1V4+fv9Z+4H0l3E+cRLLOy+ewyAAZ
+BBJcaX8TCNWFqmQjasKaoa3BK+KbC7BYAEWIoiMbrh7vo5vZPljbf+xkpv3tBkOItJtsiPF8FvC4
+RACui0s9ZKLWHK2it4OqKpVDyU6k6HkxLHvprp3uyepZP6/Rujqtj/d0FydM1z3kplKraFesdWRW
+wRkGw00Ni2rRkf1n6Hsf7i51f91SOc3mZUA36fQRBRfhq0zbwV/BNvdzYXaKmLGUVkflsj6LaXBs
+IsNGm+FpxjkfxSY8FXkeHfp9g3OG0v9qflXQ10Fra2v/d+6OFseKdcgQtinON+GWpT9bMMIwfmic
+x13gdBiGPbtzIjM4eLTmZ8s/TBlvAzytloAAAAAASUVORK5CYIIA
+
+--_012_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_
+Content-Type: image/png; name="Outlook-3iifbdux.png"
+Content-Description: Outlook-3iifbdux.png
+Content-Disposition: inline; filename="Outlook-3iifbdux.png"; size=1469;
+	creation-date="Fri, 13 Jun 2025 15:26:38 GMT";
+	modification-date="Fri, 13 Jun 2025 15:26:38 GMT"
+Content-ID: <29c71a54-f193-44ed-9530-e775018c163b>
+Content-Transfer-Encoding: base64
+
+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
+
+--_012_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_
+Content-Type: image/png; name="Outlook-w3zev3sr.png"
+Content-Description: Outlook-w3zev3sr.png
+Content-Disposition: inline; filename="Outlook-w3zev3sr.png"; size=1403;
+	creation-date="Fri, 13 Jun 2025 15:26:38 GMT";
+	modification-date="Fri, 13 Jun 2025 15:26:38 GMT"
+Content-ID: <32edf7b4-8356-4824-9f79-964eb7a70626>
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAlwSFlzAAAO
+xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAAT6SURBVEhL
+jVZdbBRVFD535s7M7mxbtxUqFGxrBYJGjUQh1FhbtoSYqPDgX3xoAhRi4rMvRmRZ1CejMUaNBktR
+Q8orAWOCZBH3oVmJBhJCS2hopMU2/aO03b/5u353th132yXpTXZn5t5zvvN/zuWJRIIqrXj8CaX9
+nXtbSTfahGAx4dnbPddplLSKwkeYqqcZ8y6RVUhd7qsdTCQGvEo4vNJmcnDjjl37rUMema+SEOuJ
+BB4iIMVXM8MPot4mwxzbddA6nxx67IfYpuE/l+OVCYjH46ytq3c/D+lHSFFbhJ0n1ykAvwQc78J1
+CNYQYwpxzVhPqnFY4azz4lDTJ6nX9v+YGEgE1gQCiuA97yucHwOEaWdnAQw6gDBG5DgeZQu2NCZY
+IQPsksbOkRaqbgHv121ne9fGTx/4DK73KQMB7V09B4kbx8j1TNteKIIAXAF4AeAufk9vXkePN9aR
+oankwpJrA2M0Mj5HmsrIzs/Dmoip6vrRjq6eaaLRnkDAhevRHdzUjjBiAM9I5EBLC8BS+7defoq6
+9m2jhvqa4Oz4N0m6NTxNvEoHByMHvJpaHSGmf5S8uuZ67NmpNO/vj3LtkehhZEWznYNbSpZ0TTZv
+0TNb1lH368/TmrrIypz4Xxf/zMkvkBaONlFNzaH+fucvPr+Wb+aC9noIpp8pEnVxeZ7wtd/cuIZq
+HzL93cmZDPWdv0YTeA4OT1IopIFliQe5BQzXyUsv7AX2F5xrZhu5rN5FoErBJYsLAfMZi2zHxZGM
+GaORsVn6ti8NAQvU8mgtmRDglVYAhMnMU7VwPedmGxeW6CQGipJUlJq64NIRzD0vbKJtTzYEcamN
+mvQG4pHJWTQ8eo/GJ+eIq2q56yQW+IUrOrkrnJ1MLHMkyC3bo2hNmD54twOa1qF6izRNDVE6+l7M
+d8WHX/5Gt+9MU3WVWpIWRVmeZ8vy3MnxtqEktZcFmVEYLlgCl4cKXCAty+Zsuj+X8/2/Uj1ZHq4k
+31CxVcgTjSs+yHdn0rS7dRO9tL3ZBxubnKdf/7iJ5wKNogYM/YEQvrKcKepdPBsXJQYWcAjIo3J/
+OnvVD8+LzzWTdPX49AJ9f+YKzcxlqf7hiG9NpQVcuX2XK0xNo2Ib3aJJwfIzFn6vjugUNrSg9lRF
+gc8NclwX7lLKmmApv6KAR3hpjoZ1EU5+00/RZZlUUbXVbEosKILkvMidfCbFzaoJlRv1rlVeC6vB
+WkEDJVUthG0x4WNXzzu38iY7p3Cj20N7RmrhsFJerE6cTASVh1AD1jkT2Ly1dda5MMhPcK1mNw9F
+mmz0kuVLpqm6WAccnfPByyMeqibPse6QPX9CYvs5tmfrVDo5FPpYCP0rrkdMx5IddWkVp5ltu8gi
+ZbFtlI0F6Q6fmGtVMoxZEvbxGDD9vSWYyz93n8Q0q1O4dgzDw5T9nYHaDGv0941/SbZmlas0cz9D
+BcvBTFCKSeEPJSYHDsSwrGfZidTp7pOxxVkfCJATKB4/8Hl716kpxrUjuhltcW00LbdAd9DgbqJz
+Sj2liyJhnTiEyW+Vm6TqhhR0W7j2p6l95qnEluI0K7NAfkAI1PmnNzm08Qbj+iHcHl4RjK0Po2aM
+kIUG4/pKyyJSVAwZ2SaYMiY85xfhWBj6o+nYQHmEKta5JMS15UrH4rUFkDFAbUf39q8teB/BP3yM
+a0shl/rdv7bcrnht+Q+8RB+2FaG0lAAAAABJRU5ErkJgggA=
+
+--_012_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_
+Content-Type: image/png; name="Outlook-ebdg0na1.png"
+Content-Description: Outlook-ebdg0na1.png
+Content-Disposition: inline; filename="Outlook-ebdg0na1.png"; size=1430;
+	creation-date="Fri, 13 Jun 2025 15:26:38 GMT";
+	modification-date="Fri, 13 Jun 2025 15:26:38 GMT"
+Content-ID: <d9cca2eb-cc7b-46f1-9541-abc7edaced76>
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAlwSFlzAAAO
+xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAAUVSURBVEhL
+jVVtbFRFFD0zb/abrlugIXzYBGgLlAIaEyMakQgiQTQxIbR2q0ZDNCFR+Y3GbdEfhog/hSb8aUiB
+xmCA+IXSoCZEAQmWlg8rWYQoQXGFXXbh7dv3Zrx3t9tu25U4yUv2zZu959xz7z2jurq6UG0lEgkx
+MK+5Maj0cgtilWewrGDMXEGH6f03n8SAC3HUdt0flyWHhymOqRZHVdvc0Nv3YEfTok1+gfUFI+v5
+jIYBB+clBZYIiCU+oCNsqavJpsWfFXr7du+Pt56ZGG8SQFvPvrawUp0+gQW20cgbA4+eyuXQOz+W
+EAQm68NSbC4YrO7Ys69z/qWL+yuzGQfQ1tP7pl+p9yyB6D/ag0tBmHWZ+UR2/D1jPNwxAjFLNllS
+dp9raK7vHBr6sKWlxePzowAbe/raAxRcCRFNeW5JiqrVGdssg3OGKddDBP6agJaJd05dSB9sadk1
+CvBMT98DQQudAQr+t+eNMSYJ/s8SpKCrJVLaICZFKCitt5/e3Tt4ZFP8uHo3kZDJhkWbglI23qTg
+5WWIkbHvUnX1PTFYRO0Lw/MFi+cyJO00S82JquDrD/f2nlKn582bP1XieS4mCyOJtSkUisoHFy+G
+Fbvvv0GkhJt3kb10FSadgQgEQLSQIxDqsvW1bnChCin/oxRs1l0CYM2N6xKAi6ntbah76w2oWAyG
+aiKUgvT7oPMOvZcyFQSgSZabX/Xj9/e3w/vzBmQ4BJtiRaSsrdHeChUQ1ipRbkVmb9tQdXWY2roR
+/tmzRuUpZLPIX/8LoTmzx0nGpGqfW4vrX36DuwcOIxQKQlPpuMMgrGeVp71lFWWlFEjVQBBUqnGB
+7vyaxC/btmP6ysdR/0o7VLRm9DvLqiNhZCkjGj6adND8cO3MI4oGZK4k3cYt+mhIx8rF8mQuDuPa
+ocNIDwxi4batlE0pQ0MyCU+DK5cl9afQYxVjimhVq6jWNoYCCArkj01DaPZMWMHApGPc1E4RBOD8
+KLhRZAmXCWmprrQD7n8xYcxoq27NSsxYuwYz1q2m72MzUvxJBlXkPAKSo1810LeVlPKsMlhKTjnK
+qNwllRSnNDag+YNOqEhkMnOLBCl21pghMsE8cEY5Rh8l++1g4+Ij3MtuKoXst98j0DAfwu8vspIk
+iQTJMsH4DL2nfx5EZvA8pI9KzAZI57nYWugvFFznOKzAtZAQszI0tZICIp/HjZ3dSA1cgJ45A6i0
+j0r+loKmtr554ifkkleK2bEOgZK8mQJkvzqXTF5+qGnRQbKKzTkqIteCWTvpHOwDh5Alp6RU7+Gq
+dJ6YW+FwkT3PVERacLR3xFb2kLrQ1eUtoMtCGv1UrSUbU8SWjcujP/mjQcQoeI4em4d/BKhal/Ee
+k4tSPVyjrzva2XUyHs8X2/Qg3UTtdFlIae2MCF80VeFvnGy5rPY9AFiaKcLi67SQh7v9iSvnj31X
+atXS2vviC3s37Pnkfr+2Emy5Ge0Wi84AJZBSE5blKv+PufD3KMlCE+y4nrsj57c/3jZyR48btKPS
++ehJjVshqK3TLF99jorOI8/3cRmEheJMePFeiFjTlUknzDXHFHYE03/sPLllC/MornEAt+LxwqdA
+N11AQxHtf00JrLOEnM7GxXcwW0p4JBNDneIrFhVpD/prx3W6j73a2l8OXBWgvPn5y63HYz8kTjw2
+vLQ5BL2CnGW9EXo5xY6SDIbkuu0KcdqR+oin7X7bwtmTL8XZJSatfwFu5BzSda81zgAAAABJRU5E
+rkJgggA=
+
+--_012_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_
+Content-Type: image/png; name="Outlook-twf05o2b.png"
+Content-Description: Outlook-twf05o2b.png
+Content-Disposition: inline; filename="Outlook-twf05o2b.png"; size=1838;
+	creation-date="Fri, 13 Jun 2025 15:26:38 GMT";
+	modification-date="Fri, 13 Jun 2025 15:26:38 GMT"
+Content-ID: <9af87449-3496-4791-be0b-b77d29479f50>
+Content-Transfer-Encoding: base64
+
+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
+4wAAAABJRU5ErkJgggA=
+
+--_012_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_
+Content-Type: image/jpg; name="Outlook-ghyfzwps"
+Content-Description: Outlook-ghyfzwps
+Content-Disposition: inline; filename="Outlook-ghyfzwps"; size=800;
+	creation-date="Fri, 13 Jun 2025 15:26:38 GMT";
+	modification-date="Fri, 13 Jun 2025 15:26:38 GMT"
+Content-ID: <289a9e68-0633-415c-9796-dbe2d64022be>
+Content-Transfer-Encoding: base64
+
+/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsK
+CwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQU
+FBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAMAAwDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7d8N+
+MNY8F/HjxNpPjDXzDouoxtdaUL19sG3cCqxsflTam5SOMlc9cZ9usNQtdVs4ruyuYby1lGY57eQO
+jj1DDg1h+O/h7oXxH0f+ztcsxcRKd0UqnbLC395G7H9D3BqL4c/DrS/hf4d/sbSHuZbYzNO0l3IH
+dnYAE8AAcKOAB09c14+GjWw1d0G+aDvJNt3V3t/TPpcbPDY3CxxcU41I8sWklyuy3WzTaWqs9evb
+/9k=
+
+--_012_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_
+Content-Type: image/jpg; name="Outlook-4g24exjb"
+Content-Description: Outlook-4g24exjb
+Content-Disposition: inline; filename="Outlook-4g24exjb"; size=818;
+	creation-date="Fri, 13 Jun 2025 15:26:38 GMT";
+	modification-date="Fri, 13 Jun 2025 15:26:38 GMT"
+Content-ID: <c205d940-b668-4383-b08f-194979a4bd73>
+Content-Transfer-Encoding: base64
+
+/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsK
+CwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQU
+FBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAMAAwDASIA
+AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
+AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3
+ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm
+p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA
+AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK
+U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3
+uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7b8PP
+8Vbvw/pOpPq15r0eq2cN1DJp76fZ/ZzJGrbZVltmyoz95CScfdrzn4vfE74pfCfxFZ6VceMUvJri
+yW8by9Pttse6SRdgYxDdjZ97C5z0FfR9r8K9CsbSG1tpdat7aFFjjhi1+/VEQDAVVE+AABgAVlax
++z/4G8RXS3Oq6Xd6ncKgjWa81a8lcKCSFBaUnGSTj3NfJ4jLcbOjy0arUtNXOXz6X+9s/QsHnmV0
+8S6mJw8ZU9dFShd9t5WVvJK5/9k=
+
+--_012_DB9PR02MB72286CC09312020D23F01ECD9677ADB9PR02MB7228eurp_--
+
